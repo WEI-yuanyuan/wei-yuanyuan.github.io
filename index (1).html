@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yuanyuan Wei — AI for Biomedicine</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1e2a3a;
+    --paper: #fcfbf9;
+    --cream: #f3f1ed;
+    --accent: #2e6eb5;
+    --accent-deep: #1d5a9e;
+    --accent-soft: #e5eef8;
+    --sky: #5994c4;
+    --sky-soft: #eaf2fa;
+    --warm: #c8956c;
+    --warm-soft: #faf0e6;
+    --muted: #7a7f88;
+    --light-muted: #a8adb5;
+    --rule: #e4e0d8;
+    --white: #ffffff;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Source Sans 3', system-ui, sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.72; font-size: 16.5px; -webkit-font-smoothing: antialiased; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(252,251,249,0.88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--rule); }
+  .nav-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 54px; padding: 0 1.5rem; }
+  .nav-name { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; color: var(--ink); text-decoration: none; }
+  .nav-links { display: flex; gap: 1.6rem; }
+  .nav-links a { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; position: relative; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 1.5px; background: var(--accent); transform: scaleX(0); transition: transform 0.25s; }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .mobile-toggle { display: none; cursor: pointer; background: none; border: none; padding: 0.5rem; }
+  .mobile-toggle svg { width: 22px; height: 22px; stroke: var(--ink); }
+
+  .hero { min-height: 100vh; display: flex; align-items: center; padding: 5rem 1.5rem 3rem; position: relative; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 20%, var(--accent-soft) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 15% 80%, var(--sky-soft) 0%, transparent 60%); opacity: 0.5; pointer-events: none; }
+  .hero-inner { max-width: 960px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 260px; gap: 3.5rem; align-items: center; position: relative; z-index: 1; }
+  .hero-label { font-family: var(--mono); font-size: 0.74rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; opacity: 0; animation: fadeIn 0.6s 0.1s ease forwards; }
+  .hero-name { font-family: var(--serif); font-size: 3rem; font-weight: 700; line-height: 1.15; margin-bottom: 1.4rem; color: var(--ink); opacity: 0; animation: fadeIn 0.6s 0.2s ease forwards; }
+  .hero-tagline { font-size: 1.12rem; font-weight: 300; line-height: 1.8; color: #4a4f5a; max-width: 520px; margin-bottom: 1.8rem; opacity: 0; animation: fadeIn 0.6s 0.35s ease forwards; }
+  .hero-tagline strong { font-weight: 600; color: var(--ink); }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font-size: 0.88rem; color: var(--muted); opacity: 0; animation: fadeIn 0.6s 0.5s ease forwards; }
+  .hero-meta a { color: var(--accent); text-decoration: none; }
+  .hero-meta a:hover { text-decoration: underline; }
+  .photo-wrap { display: flex; justify-content: center; opacity: 0; animation: fadeIn 0.6s 0.45s ease forwards; }
+  .photo-placeholder { width: 230px; height: 290px; border-radius: 140px 140px 24px 24px; background: linear-gradient(160deg, var(--accent-soft), var(--sky-soft), var(--warm-soft)); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; color: var(--muted); font-style: italic; border: 1px solid var(--rule); }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+  .section { max-width: 960px; margin: 0 auto; padding: 4.5rem 1.5rem; }
+  .section + .section { border-top: 1px solid var(--rule); }
+  .section-title { font-family: var(--serif); font-size: 1.7rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .section-subtitle { font-size: 0.88rem; color: var(--muted); margin-bottom: 2.2rem; }
+
+  .research-narrative { font-size: 1.05rem; line-height: 1.85; color: #3e4350; max-width: 740px; margin-bottom: 2.8rem; }
+  .research-narrative em { font-style: normal; color: var(--accent); font-weight: 500; }
+  .journey-flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; position: relative; margin-bottom: 2.5rem; }
+  .journey-flow::before { content: ''; position: absolute; top: 36px; left: 16.66%; right: 16.66%; height: 2px; background: linear-gradient(90deg, var(--sky), var(--accent), var(--warm)); opacity: 0.35; }
+  .journey-step { text-align: center; padding: 0 0.8rem; position: relative; }
+  .journey-dot { width: 12px; height: 12px; border-radius: 50%; margin: 30px auto 1rem; position: relative; z-index: 1; }
+  .journey-step:nth-child(1) .journey-dot { background: var(--sky); box-shadow: 0 0 0 4px var(--sky-soft); }
+  .journey-step:nth-child(2) .journey-dot { background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+  .journey-step:nth-child(3) .journey-dot { background: var(--warm); box-shadow: 0 0 0 4px var(--warm-soft); }
+  .journey-era { font-family: var(--mono); font-size: 0.7rem; color: var(--light-muted); letter-spacing: 0.05em; margin-bottom: 0.35rem; }
+  .journey-title { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .journey-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.55; }
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .stat-item { text-align: center; padding: 1.3rem 0.8rem; background: var(--white); border-radius: 10px; border: 1px solid var(--rule); }
+  .stat-num { font-family: var(--serif); font-size: 2rem; font-weight: 700; color: var(--accent); line-height: 1.1; }
+  .stat-label { font-size: 0.76rem; color: var(--muted); margin-top: 0.3rem; }
+
+  .pub-note { font-size: 0.88rem; color: var(--muted); margin-bottom: 2rem; }
+  .pub-note a { color: var(--accent); text-decoration: none; }
+  .pub-note a:hover { text-decoration: underline; }
+  .pub-group { margin-bottom: 2rem; }
+  .pub-group-label { font-family: var(--mono); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--sky); padding-bottom: 0.5rem; border-bottom: 1px dashed var(--rule); margin-bottom: 0.8rem; }
+  .pub-entry { padding: 0.65rem 0; font-size: 0.9rem; line-height: 1.65; color: #3e4350; }
+  .pub-entry + .pub-entry { border-top: 1px solid #f0ede6; }
+  .pub-entry .me { font-weight: 700; color: var(--ink); }
+  .pub-entry .journal { font-style: italic; color: var(--accent); }
+  .pub-entry a { color: var(--accent); text-decoration: none; font-size: 0.8rem; font-weight: 500; }
+  .pub-entry a:hover { text-decoration: underline; }
+
+  /* PEER REVIEW */
+  .review-list { font-size: 0.92rem; color: #3e4350; line-height: 1.8; }
+  .review-journal { font-weight: 600; }
+  .review-if { font-size: 0.8rem; color: var(--muted); }
+
+  .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .timeline { position: relative; padding-left: 1.6rem; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 0.4rem; bottom: 0.4rem; width: 1.5px; background: linear-gradient(180deg, var(--accent), var(--rule)); }
+  .tl-item { position: relative; padding-bottom: 1.6rem; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-item::before { content: ''; position: absolute; left: -1.6rem; top: 0.5rem; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); transform: translateX(-3.25px); }
+  .tl-date { font-family: var(--mono); font-size: 0.73rem; color: var(--light-muted); }
+  .tl-role { font-weight: 600; font-size: 0.95rem; }
+  .tl-place { font-size: 0.88rem; color: var(--muted); }
+  .skills-block h3 { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem; }
+  .skill-category { margin-bottom: 1.2rem; }
+  .skill-category-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 0.4rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag { font-size: 0.78rem; padding: 0.28rem 0.7rem; border-radius: 16px; border: 1px solid var(--rule); background: var(--white); color: var(--muted); font-weight: 500; transition: all 0.2s; }
+  .tag:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+
+  .life-intro { font-size: 1rem; color: #4a4f5a; max-width: 600px; margin-bottom: 2rem; line-height: 1.75; }
+  .photo-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 190px 190px; gap: 0.7rem; margin-bottom: 2rem; }
+  .photo-cell { border-radius: 12px; display: flex; align-items: flex-end; padding: 1rem; position: relative; overflow: hidden; cursor: default; transition: transform 0.3s; }
+  .photo-cell:hover { transform: scale(1.015); }
+  .photo-cell::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.32) 100%); pointer-events: none; }
+  .photo-cell span { position: relative; z-index: 1; font-size: 0.8rem; font-weight: 600; color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,0.3); }
+  .photo-cell:nth-child(1) { grid-column: 1 / 3; background: linear-gradient(135deg, #5994c4, #2e6eb5); }
+  .photo-cell:nth-child(2) { background: linear-gradient(135deg, #7ab5d4, #4a90b8); }
+  .photo-cell:nth-child(3) { background: linear-gradient(135deg, #d4a373, #c8956c); }
+  .photo-cell:nth-child(4) { background: linear-gradient(135deg, #a0b8d1, #7094b8); }
+  .photo-cell:nth-child(5) { grid-column: 3 / 5; background: linear-gradient(135deg, #c4a0d4, #9878b8); }
+  .life-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .life-tag { font-size: 0.85rem; padding: 0.4rem 1rem; border-radius: 20px; background: var(--white); border: 1px solid var(--rule); color: #4a4f5a; transition: all 0.2s; }
+  .life-tag:hover { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+  .danmaku-section { position: relative; }
+  .danmaku-intro { font-size: 0.95rem; color: var(--muted); margin-bottom: 1.5rem; max-width: 560px; line-height: 1.7; }
+  .danmaku-stage { position: relative; width: 100%; height: 320px; background: linear-gradient(135deg, #1a2740 0%, #1e3455 40%, #223a5c 100%); border-radius: 16px; overflow: hidden; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.06); }
+  .danmaku-stage::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 30% 40% at 20% 30%, rgba(89,148,196,0.12) 0%, transparent 70%), radial-gradient(ellipse 25% 30% at 80% 70%, rgba(200,149,108,0.08) 0%, transparent 70%); pointer-events: none; }
+  .danmaku-empty { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: rgba(255,255,255,0.25); font-size: 0.9rem; pointer-events: none; }
+  .danmaku-empty span { display: block; font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .danmaku-item { position: absolute; white-space: nowrap; font-size: 0.88rem; font-weight: 500; padding: 0.35rem 0.9rem; border-radius: 20px; color: #fff; pointer-events: none; animation: danmakuFloat linear forwards; will-change: transform; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+  @keyframes danmakuFloat { from { transform: translateX(0); } to { transform: translateX(calc(-100% - 100vw)); } }
+  .danmaku-form { display: flex; gap: 0.6rem; max-width: 600px; flex-wrap: wrap; }
+  .danmaku-form input { font-family: var(--sans); font-size: 0.9rem; padding: 0.6rem 0.9rem; border: 1px solid var(--rule); border-radius: 8px; background: var(--white); color: var(--ink); outline: none; transition: border-color 0.2s; }
+  .danmaku-form input:focus { border-color: var(--accent); }
+  .danmaku-form .df-name { width: 140px; }
+  .danmaku-form .df-msg { flex: 1; min-width: 200px; }
+  .danmaku-form button { font-family: var(--sans); font-size: 0.88rem; font-weight: 600; padding: 0.6rem 1.4rem; border: none; border-radius: 8px; background: var(--accent); color: #fff; cursor: pointer; transition: all 0.2s; }
+  .danmaku-form button:hover { background: var(--accent-deep); transform: translateY(-1px); }
+  .danmaku-hint { font-size: 0.78rem; color: var(--light-muted); margin-top: 0.8rem; }
+
+  .contact-bar { text-align: center; padding: 4rem 1.5rem; background: var(--cream); }
+  .contact-bar h2 { font-family: var(--serif); font-size: 1.5rem; margin-bottom: 0.6rem; }
+  .contact-bar p { color: var(--muted); font-size: 0.95rem; max-width: 480px; margin: 0 auto 1.5rem; }
+  .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .c-link { font-size: 0.85rem; font-weight: 600; color: var(--accent); text-decoration: none; padding: 0.55rem 1.2rem; border: 1.5px solid var(--accent); border-radius: 8px; transition: all 0.2s; }
+  .c-link:hover { background: var(--accent); color: #fff; }
+  footer { text-align: center; padding: 1.5rem; font-size: 0.75rem; color: var(--light-muted); }
+
+  @media (max-width: 768px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+    .photo-wrap { order: -1; }
+    .photo-placeholder { width: 180px; height: 220px; }
+    .hero-name { font-size: 2.2rem; }
+    .hero-tagline { max-width: 100%; }
+    .hero-meta { justify-content: center; }
+    .journey-flow { grid-template-columns: 1fr; gap: 1.5rem; }
+    .journey-flow::before { display: none; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .exp-grid { grid-template-columns: 1fr; }
+    .photo-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 160px); }
+    .photo-cell:nth-child(1) { grid-column: 1 / 3; }
+    .photo-cell:nth-child(5) { grid-column: 1 / 3; }
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 54px; left: 0; right: 0; background: rgba(252,251,249,0.97); padding: 1rem 1.5rem; gap: 0.8rem; border-bottom: 1px solid var(--rule); }
+    .mobile-toggle { display: block; }
+    .danmaku-stage { height: 240px; }
+    .danmaku-form { flex-direction: column; }
+    .danmaku-form .df-name { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-name">Yuanyuan Wei</a>
+    <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="nav-links">
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#service">Service</a>
+      <a href="#experience">Experience</a>
+      <a href="#life">Life</a>
+      <a href="#guestbook">Guestbook</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-label">Postdoctoral Scholar · UCLA Neurology</div>
+      <h1 class="hero-name">Yuanyuan Wei</h1>
+      <p class="hero-tagline">I translate <strong>cutting-edge AI</strong> into tools that solve real biomedical problems — from <strong>molecular diagnostics</strong> to <strong>drug discovery for neurodegenerative diseases</strong>. Every pipeline I build is validated with lab-generated biological data through <strong>closed-loop iteration</strong>, benchmarked as <strong>field-leading performance</strong>, and released with the <strong>first open benchmarks</strong> in each domain to advance the community.</p>
+      <div class="hero-meta">
+        <span>📧 <a href="mailto:yuanyuanwei@mednet.ucla.edu">yuanyuanwei@mednet.ucla.edu</a></span>
+        <span>🎓 <a href="https://scholar.google.com/citations?hl=zh-CN&user=K3Xmwr8AAAAJ" target="_blank">Google Scholar</a></span>
+        <span>📄 <a href="https://www.ncbi.nlm.nih.gov/myncbi/yuanyuan.wei.4/bibliography/public/" target="_blank">PubMed</a></span>
+        <span>💬 WeChat: Weiyy1415926</span>
+      </div>
+    </div>
+    <div class="photo-wrap">
+      <div class="photo-placeholder">Your photo here</div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section class="section" id="research">
+  <div class="section-title">Research</div>
+  <div class="section-subtitle">Making AI work for the people who need it most</div>
+
+  <p class="research-narrative">A recurring theme across my work: powerful AI tools exist, but they rarely reach the biologists, clinicians, or patients who would benefit most. My research closes that gap — not by applying off-the-shelf models, but by building <em>domain-customized AI pipelines</em> that are trained and validated on our own lab-generated biological data, iteratively refined through closed-loop experimental feedback, and benchmarked to deliver field-leading performance. Equally important, I build <em>the first open benchmarks</em> in each domain I enter — from droplet microfluidics to AD-tau inhibitor compounds — so that others can build on this foundation. During my PhD, I developed training-free AI pipelines that brought foundation models into molecular diagnostics. Now at UCLA, I apply the same philosophy to designing small-molecule therapeutics for <em>Alzheimer's and Parkinson's disease</em>, where conventional drug discovery has repeatedly failed because existing AI models weren't built for the unique geometry of pathological protein fibrils.</p>
+
+  <div class="journey-flow">
+    <div class="journey-step">
+      <div class="journey-dot"></div>
+      <div class="journey-era">2018 – 2023 · PhD at CUHK</div>
+      <div class="journey-title">AI × Droplet Microfluidics</div>
+      <div class="journey-desc">Deep learning pipelines for automated biological measurements — bridging AI with lab-on-chip systems for precision diagnostics. Built the first open benchmark database for droplet digital PCR.</div>
+    </div>
+    <div class="journey-step">
+      <div class="journey-dot"></div>
+      <div class="journey-era">2023 – 2024 · Research Associate</div>
+      <div class="journey-title">Foundation Models × Diagnostics</div>
+      <div class="journey-desc">Pioneered zero-shot learning in molecular diagnostics (SAM-dPCR) — proving pre-trained AI achieves clinical accuracy without task-specific training.</div>
+    </div>
+    <div class="journey-step">
+      <div class="journey-dot"></div>
+      <div class="journey-era">2024 – Present · UCLA</div>
+      <div class="journey-title">AI × Neurodegenerative Drug Discovery</div>
+      <div class="journey-desc">Building fibril-specific AI tools (FibrilBind, TauDiff, SSR-TauDiff) with patient-derived validation for Alzheimer's and Parkinson's therapeutics. Established the first curated compound benchmark for amyloid fibril inhibitors.</div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-item"><div class="stat-num">22+</div><div class="stat-label">Publications</div></div>
+    <div class="stat-item"><div class="stat-num">12</div><div class="stat-label">First / Corresponding</div></div>
+    <div class="stat-item"><div class="stat-num">300+</div><div class="stat-label">Citations · h-index 10</div></div>
+    <div class="stat-item"><div class="stat-num">14</div><div class="stat-label">Talks & Invited Lectures</div></div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section class="section" id="publications">
+  <div class="section-title">Selected Publications</div>
+  <div class="section-subtitle">† equal contribution · * corresponding author</div>
+  <p class="pub-note">Full list on <a href="https://www.ncbi.nlm.nih.gov/myncbi/yuanyuan.wei.4/bibliography/public/" target="_blank">PubMed</a> and <a href="https://scholar.google.com/citations?hl=zh-CN&user=K3Xmwr8AAAAJ" target="_blank">Google Scholar</a>.</p>
+
+  <div class="pub-group">
+    <div class="pub-group-label">AI-Guided Drug Discovery for Neurodegeneration (2024–present)</div>
+    <div class="pub-entry"><span class="me">Wei Y.</span>, Peng C., Wang W. FibrilBind & TauDiff: Structure-guided AI platform for amyloid fibril inhibitor discovery. <span class="journal">In preparation.</span></div>
+  </div>
+
+  <div class="pub-group">
+    <div class="pub-group-label">Foundation Models in Molecular Diagnostics (2023–2025)</div>
+    <div class="pub-entry">
+      <span class="me">Wei Y.</span>, Luo S., Xu C., et al. SAM-dPCR: Accurate and generalist nucleic acid quantification leveraging the zero-shot Segment Anything Model. <span class="journal">Advanced Science</span>, 2024, 2406797.
+      <a href="https://pubmed.ncbi.nlm.nih.gov/39400494/" target="_blank">[PubMed]</a>
+    </div>
+    <div class="pub-entry">
+      <span class="me">Wei Y.</span>, Liu X., Xu C., et al. From droplets to diagnosis: AI-driven imaging and system integration in digital nucleic acid amplification testing. <span class="journal">Biosensors and Bioelectronics</span>, 2025, 117741.
+      <a href="https://doi.org/10.1016/j.bios.2025.117741" target="_blank">[DOI]</a>
+    </div>
+    <div class="pub-entry">
+      Liu Z., Chen J., Xu M., Ho S., <span class="me">Wei Y.*</span>, Ho H.*, Yong K.* Engineered multi-domain lipid nanoparticles for targeted delivery. <span class="journal">Chemical Society Reviews</span>, 2025, 54(12): 5961–5994. (IF: 46.2)
+      <a href="https://pubmed.ncbi.nlm.nih.gov/40390667/" target="_blank">[PubMed]</a>
+    </div>
+    <div class="pub-entry">
+      <span class="me">Wei Y.*</span>, Wu Y., Qu F., et al. Interpretable droplet digital PCR assay for trustworthy molecular diagnostics. <span class="journal">arXiv</span>, 2025.
+      <a href="https://arxiv.org/abs/2501.09218" target="_blank">[arXiv]</a>
+    </div>
+  </div>
+
+  <div class="pub-group">
+    <div class="pub-group-label">AI-Integrated Droplet Microfluidic Platforms (2018–2023)</div>
+    <div class="pub-entry">
+      <span class="me">Wei Y.</span>, Abbasi S., Mehmood N., et al. Deep-qGFP: A generalist deep learning pipeline for accurate quantification of GFP-labeled biological samples in microreactors. <span class="journal">Small Methods</span>, 2023, 2301293.
+      <a href="https://pubmed.ncbi.nlm.nih.gov/38010980/" target="_blank">[PubMed]</a>
+    </div>
+    <div class="pub-entry">
+      <span class="me">Wei Y.†</span>, Cheng G.†, Ho H., et al. Thermodynamic perspectives on liquid-liquid droplet reactors for biochemical applications. <span class="journal">Chemical Society Reviews</span>, 2020, 49(18): 6555–6567. (IF: 46.2)
+      <a href="https://pubmed.ncbi.nlm.nih.gov/32766625/" target="_blank">[PubMed]</a>
+    </div>
+    <div class="pub-entry">
+      <span class="me">Wei Y.</span>, Wang T., Wang Y., et al. Rapid prototyping of multi-functional and biocompatible Parafilm-based microfluidic devices by laser ablation and thermal bonding. <span class="journal">Micromachines</span>, 2023, 14(3): 656.
+      <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10054776/" target="_blank">[PMC]</a>
+    </div>
+  </div>
+</section>
+
+<!-- PEER REVIEW SERVICE -->
+<section class="section" id="service">
+  <div class="section-title">Academic Service</div>
+  <div class="section-subtitle">Ad hoc peer reviewer for international journals</div>
+  <div class="review-list">
+    <span class="review-journal">Information Fusion</span> <span class="review-if">(IF: 17.9)</span><br>
+    <span class="review-journal">Results in Engineering</span> <span class="review-if">(IF: 6.0)</span><br>
+    <span class="review-journal">Measurement</span> <span class="review-if">(IF: 5.6)</span><br>
+    <span class="review-journal">Talanta</span> <span class="review-if">(IF: 5.6)</span>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+  <div class="section-title">Experience & Education</div>
+  <div class="section-subtitle">From Tsinghua to Hong Kong to UCLA</div>
+  <div class="exp-grid">
+    <div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-date">2024 – present</div><div class="tl-role">Postdoctoral Scholar</div><div class="tl-place">Dept. of Neurology, UCLA David Geffen School of Medicine</div><div class="tl-place" style="color: var(--accent); font-size: 0.84rem; margin-top: 0.2rem;">Mentors: Chao Peng · Wei Wang</div></div>
+        <div class="tl-item"><div class="tl-date">2023 – 2024</div><div class="tl-role">Research Associate</div><div class="tl-place">Dept. of Biomedical Engineering, CUHK</div></div>
+        <div class="tl-item"><div class="tl-date">2018 – 2023</div><div class="tl-role">Ph.D. in Biomedical Engineering</div><div class="tl-place">The Chinese University of Hong Kong</div></div>
+        <div class="tl-item"><div class="tl-date">2014 – 2018</div><div class="tl-role">B.S. in Precision Instrument</div><div class="tl-place">Tsinghua University, Beijing</div></div>
+      </div>
+    </div>
+    <div class="skills-block">
+      <h3>Technical Expertise</h3>
+      <div class="skill-category"><div class="skill-category-label">Machine Learning</div><div class="tags"><span class="tag">Graph Neural Networks</span><span class="tag">Diffusion Models</span><span class="tag">Foundation Models</span><span class="tag">Zero-Shot Learning</span><span class="tag">Computer Vision</span><span class="tag">PyTorch</span></div></div>
+      <div class="skill-category"><div class="skill-category-label">Drug Discovery</div><div class="tags"><span class="tag">Molecular Docking</span><span class="tag">Virtual Screening</span><span class="tag">ADMET Prediction</span><span class="tag">Structure-Based Design</span></div></div>
+      <div class="skill-category"><div class="skill-category-label">Experimental</div><div class="tags"><span class="tag">Primary Neuron Culture</span><span class="tag">iPSC-Derived Neurons</span><span class="tag">High-Throughput Screening</span><span class="tag">Digital PCR</span><span class="tag">Droplet Microfluidics</span></div></div>
+
+      <h3 style="margin-top: 1.8rem;">Selected Honors</h3>
+      <div style="font-size: 0.88rem; color: var(--muted); line-height: 1.85; margin-top: 0.5rem;">
+        UCLA Bioscientists of Tomorrow Cohort (2025)<br>
+        Annual Champion, Best Presentation, BME Dept., CUHK (2024)<br>
+        HK Medical &amp; Health Care Device Industries Association Award (2024)<br>
+        Talent Development Scholarship, HKSAR Government (2023)<br>
+        Champion + Special Award, Prof. Charles K. Kao Creativity Awards (2019)<br>
+        Outstanding Student Leader Award, Tsinghua University (2016)
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEYOND THE LAB -->
+<section class="section" id="life">
+  <div class="section-title">Beyond the Lab</div>
+  <div class="section-subtitle">The person behind the papers</div>
+  <p class="life-intro">I believe the best science comes from a full life. When I'm not at the bench or debugging model architectures, you'll find me on a trail, in a kayak, or road-tripping to the next national park. I'm also passionate about mentorship — I've spent years coaching students and friends through academic and personal challenges, and I carry that same energy into everything I do.</p>
+  <div class="photo-grid">
+    <div class="photo-cell"><span>🥾 Hiking adventures</span></div>
+    <div class="photo-cell"><span>🚴 Cycling</span></div>
+    <div class="photo-cell"><span>🛶 Kayaking</span></div>
+    <div class="photo-cell"><span>🏔️ National Parks</span></div>
+    <div class="photo-cell"><span>👥 Friends & Mentorship</span></div>
+  </div>
+  <div class="life-tags">
+    <span class="life-tag">🥾 Hiking</span>
+    <span class="life-tag">🚴 Cycling</span>
+    <span class="life-tag">🛶 Kayaking</span>
+    <span class="life-tag">🚗 Road Trips</span>
+    <span class="life-tag">🏕️ National Parks</span>
+    <span class="life-tag">✈️ Traveling</span>
+    <span class="life-tag">🤝 Mentorship & Coaching</span>
+  </div>
+</section>
+
+<!-- DANMAKU GUESTBOOK -->
+<section class="section danmaku-section" id="guestbook">
+  <div class="section-title">Say Hi 👋</div>
+  <div class="section-subtitle">Send a danmaku — watch it fly across the screen</div>
+  <p class="danmaku-intro">Leave a quick note and it'll float across the board below. Think of it as a virtual wave.</p>
+  <div class="danmaku-stage" id="danmaku-stage">
+    <div class="danmaku-empty" id="danmaku-empty"><span>💬</span>Be the first to send a message!</div>
+  </div>
+  <div class="danmaku-form">
+    <input type="text" class="df-name" placeholder="Your name" id="dm-name" maxlength="30">
+    <input type="text" class="df-msg" placeholder="Say something nice..." id="dm-msg" maxlength="80">
+    <button onclick="sendDanmaku()">Send 🚀</button>
+  </div>
+  <div class="danmaku-hint">Messages are stored and replayed for all visitors. Keep it kind! ✨</div>
+</section>
+
+<div class="contact-bar" id="contact">
+  <h2>Let's Connect</h2>
+  <p>I'm on track toward a faculty position (2027–2028) and always open to collaborations, conversations, and new ideas.</p>
+  <div class="contact-links">
+    <a href="mailto:yuanyuanwei@mednet.ucla.edu" class="c-link">Email</a>
+    <a href="https://www.ncbi.nlm.nih.gov/myncbi/yuanyuan.wei.4/bibliography/public/" target="_blank" class="c-link">PubMed</a>
+    <a href="https://scholar.google.com/citations?hl=zh-CN&user=K3Xmwr8AAAAJ" target="_blank" class="c-link">Google Scholar</a>
+    <a href="https://www.linkedin.com/in/yuanyuan-wei-73a855184/" target="_blank" class="c-link">LinkedIn</a>
+  </div>
+</div>
+
+<footer>© 2026 Yuanyuan Wei · UCLA Department of Neurology · Last updated March 2026</footer>
+
+<script>
+const DANMAKU_COLORS = [
+  'rgba(89,148,196,0.85)','rgba(78,130,190,0.85)','rgba(106,162,210,0.85)',
+  'rgba(200,149,108,0.8)','rgba(160,136,190,0.8)','rgba(120,175,155,0.8)',
+  'rgba(180,130,150,0.8)','rgba(140,160,200,0.85)',
+];
+const STAGE = document.getElementById('danmaku-stage');
+const EMPTY = document.getElementById('danmaku-empty');
+let activeDanmaku = 0;
+const occupiedRows = new Map();
+
+function launchDanmaku(name, text, delay) {
+  setTimeout(() => {
+    EMPTY.style.display = 'none';
+    const el = document.createElement('div');
+    el.className = 'danmaku-item';
+    el.textContent = name ? name + ': ' + text : text;
+    el.style.background = DANMAKU_COLORS[Math.floor(Math.random() * DANMAKU_COLORS.length)];
+    el.style.top = findOpenRow(STAGE.offsetHeight) + 'px';
+    el.style.animationDuration = (12 + Math.random() * 6) + 's';
+    el.style.left = '100%';
+    STAGE.appendChild(el);
+    activeDanmaku++;
+    el.addEventListener('animationend', () => { el.remove(); activeDanmaku--; });
+  }, delay || 0);
+}
+
+function findOpenRow(stageH) {
+  const rowH = 38, maxRows = Math.floor((stageH - 20) / rowH), now = Date.now();
+  for (const [k,v] of occupiedRows) { if (now - v > 3000) occupiedRows.delete(k); }
+  for (let i = 0; i < maxRows; i++) { if (!occupiedRows.has(i)) { occupiedRows.set(i, now); return 12 + i * rowH; } }
+  return 12 + Math.floor(Math.random() * maxRows) * rowH;
+}
+
+async function loadMessages() {
+  try {
+    const result = await window.storage.get('danmaku-messages');
+    if (result && result.value) {
+      const msgs = JSON.parse(result.value);
+      if (msgs.length > 0) { EMPTY.style.display = 'none'; replayMessages(msgs); }
+    }
+  } catch (e) {}
+}
+
+function replayMessages(msgs) {
+  const recent = msgs.slice(0, 30);
+  recent.forEach((m, i) => { launchDanmaku(m.name, m.text, i * 800 + Math.random() * 400); });
+  if (recent.length > 3) {
+    setInterval(() => {
+      const m = recent[Math.floor(Math.random() * recent.length)];
+      launchDanmaku(m.name, m.text, 0);
+    }, 4000 + Math.random() * 3000);
+  }
+}
+
+async function sendDanmaku() {
+  const name = document.getElementById('dm-name').value.trim();
+  const text = document.getElementById('dm-msg').value.trim();
+  if (!text) { alert('Please write a message!'); return; }
+  launchDanmaku(name || '✨', text, 0);
+  const msg = { name: name || 'Anonymous', text, date: new Date().toISOString() };
+  let msgs = [];
+  try { const r = await window.storage.get('danmaku-messages'); if (r && r.value) msgs = JSON.parse(r.value); } catch (e) {}
+  msgs.unshift(msg);
+  if (msgs.length > 200) msgs = msgs.slice(0, 200);
+  try { await window.storage.set('danmaku-messages', JSON.stringify(msgs)); } catch (e) {}
+  document.getElementById('dm-name').value = '';
+  document.getElementById('dm-msg').value = '';
+}
+
+document.getElementById('dm-msg').addEventListener('keydown', e => { if (e.key === 'Enter') sendDanmaku(); });
+loadMessages();
+</script>
+</body>
+</html>
