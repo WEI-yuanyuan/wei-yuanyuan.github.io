@@ -248,6 +248,42 @@
     .lightbox.active { animation: none; }
     .danmaku-item { animation-duration: 30s !important; }
   }
+
+
+  /* Focused spacing and alignment refinements, November 18, 2026. */
+  .hero { min-height: 0; padding: 7.3rem 1.5rem 3.7rem; }
+  .hero-inner { grid-template-columns: minmax(0, 1fr) 278px; gap: 3rem; }
+  .hero-name { font-size: 3.35rem; margin-bottom: 1.1rem; }
+  .hero-tagline { font-size: 1.16rem; line-height: 1.72; }
+  .hero-award { margin-bottom: 1.05rem; }
+  .photo-wrap img { width: 250px !important; height: 315px !important; }
+  .section { padding-top: 3.7rem; padding-bottom: 3.7rem; }
+  .section-subtitle { margin-bottom: 1.65rem; }
+  .journey-role { font-family: var(--mono); font-size: .71rem; line-height: 1.55; color: var(--muted); margin: .35rem 0 .4rem; min-height: 1.15rem; }
+  .journey-era { white-space: nowrap; }
+  .journey-title { min-height: 3.4rem; display: flex; align-items: center; justify-content: center; }
+  .journey-school { margin-bottom: .25rem; }
+  .journey-flow { margin-bottom: 2.1rem; }
+  .expertise-grid { display: grid; grid-template-columns: 1.12fr 1fr; gap: 3.7rem; align-items: start; }
+  .expertise-grid .skills-block h3, .honors-panel h3 { font-family: var(--serif); font-size: 1.16rem; font-weight: 700; margin-bottom: 1.05rem; }
+  .expertise-grid .skill-category { margin-bottom: 1.25rem; }
+  .expertise-grid .skill-category:last-child { margin-bottom: 0; }
+  .honors-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .68rem; }
+  .honors-list li { padding-bottom: .68rem; border-bottom: 1px solid var(--rule); font-size: .86rem; line-height: 1.52; }
+  .honors-list li:last-child { border-bottom: none; padding-bottom: 0; }
+  .honor-name { color: #3e4350; font-weight: 600; display: block; }
+  .honor-meta { color: var(--muted); font-size: .77rem; display: block; margin-top: .13rem; }
+  @media (max-width: 768px) {
+    .hero { padding: 5.5rem 1.5rem 2.85rem; }
+    .hero-inner { grid-template-columns: 1fr; gap: 1.55rem; }
+    .hero-name { font-size: 2.6rem; }
+    .hero-tagline { font-size: 1.04rem; line-height: 1.75; }
+    .photo-wrap img { width: 180px !important; height: 225px !important; }
+    .section { padding-top: 3rem; padding-bottom: 3rem; }
+    .journey-role { min-height: 0; }
+    .journey-title { min-height: 0; }
+    .expertise-grid { grid-template-columns: 1fr; gap: 1.8rem; }
+  }
 </style>
 <meta content="Yuanyuan Wei, PhD, is a UCLA biomedical engineer-scientist developing biology-aware AI for Alzheimer's drug discovery. 2026 WHAM Edge Award and BrightFocus/Alzheimer's Los Angeles Bold Ideas award recipient." name="description"/><meta content="Yuanyuan Wei" name="author"/><link href="https://wei-yuanyuan.github.io/" rel="canonical"/><meta content="Yuanyuan Wei - AI for Biomedicine" property="og:title"/><meta content="Yuanyuan Wei, PhD, is a UCLA biomedical engineer-scientist developing biology-aware AI for Alzheimer's drug discovery. 2026 WHAM Edge Award and BrightFocus/Alzheimer's Los Angeles Bold Ideas award recipient." property="og:description"/><meta content="website" property="og:type"/><meta content="https://wei-yuanyuan.github.io/" property="og:url"/><meta content="https://wei-yuanyuan.github.io/images/headshot.jpg" property="og:image"/><meta content="summary" name="twitter:card"/></head>
 <body><!-- Content update: 2026-11-18. Metrics and research roles: supplied November CV and NIH biosketch. Awards/news: linked sponsor pages. Photo event labels: owner-provided descriptions. Existing image paths are intentionally retained. -->
@@ -261,14 +297,13 @@
 <a href="#research">Research</a>
 <a href="#publications">Publications</a>
 <a href="#service">Service</a>
-<a href="#experience">Experience</a>
+<a href="#experience">Expertise</a>
 <a href="#life">Life</a>
 <a href="#guestbook">Guestbook</a>
 <a href="#contact">Contact</a>
 </div>
 </div>
 </nav>
-
 <section class="hero">
 <div class="hero-bg"></div>
 <div class="hero-inner">
@@ -288,9 +323,7 @@
 </div>
 </div>
 </section>
-
 <!-- RESEARCH -->
-
 <section class="section" id="research">
 <h2 class="section-title">Research</h2>
 <div class="section-subtitle">Making AI work for the people who need it most</div>
@@ -298,28 +331,28 @@
 <div class="journey-flow" style="grid-template-columns: repeat(4, 1fr);">
 <div class="journey-step">
 <div class="journey-dot" style="background: #8b6faf; box-shadow: 0 0 0 4px #ede5f5;"></div>
-<div class="journey-era">2014 – 2018 · B.Eng.</div>
+<div class="journey-era">2014 – 2018</div><div class="journey-role">B.Eng.</div>
 <div class="journey-school"><strong>Tsinghua University</strong></div>
 <div class="journey-title">Brain-Inspired Computing</div>
-<div class="journey-desc">Application-circuit development for the Tianjic neuromorphic processor. An engineering foundation in instrumentation and brain-inspired computing.</div>
+<div class="journey-desc">Precision Instrument B.Eng.; worked on Tianjic neuromorphic processor circuits and brain-inspired computing.</div>
 </div>
 <div class="journey-step">
 <div class="journey-dot"></div>
-<div class="journey-era">2018 – 2023 · Ph.D.</div>
+<div class="journey-era">2018 – 2023</div><div class="journey-role">Ph.D.</div>
 <div class="journey-school"><strong>CUHK</strong></div>
 <div class="journey-title">AI × Droplet Microfluidics</div>
-<div class="journey-desc">Integrated microfluidics, instrumentation, and AI image analysis for quantitative biological assays.</div>
+<div class="journey-desc">Biomedical Engineering Ph.D.: microfluidics, instrumentation, and AI image analysis. Advisor: Aaron Ho-Pui Ho.</div>
 </div>
 <div class="journey-step">
 <div class="journey-dot"></div>
-<div class="journey-era">2023 – 2024 · Research Associate</div>
+<div class="journey-era">2023 – 2024</div><div class="journey-role">Research Associate</div>
 <div class="journey-school"><strong>CUHK</strong></div>
 <div class="journey-title">Foundation Models × Diagnostics</div>
-<div class="journey-desc">Developed SAM-dPCR for training-free image analysis and contributed an open digital PCR microscopy benchmark.</div>
+<div class="journey-desc">Developed SAM-dPCR and an open digital PCR microscopy benchmark. Advisors: Wu Yuan and Aaron Ho-Pui Ho.</div>
 </div>
 <div class="journey-step">
 <div class="journey-dot"></div>
-<div class="journey-era">2024 – Present · Postdoc</div>
+<div class="journey-era">2024 – Present</div><div class="journey-role">Postdoctoral Scholar</div>
 <div class="journey-school"><strong>UCLA</strong></div>
 <div class="journey-title">AI × Neurodegenerative Drug Discovery</div>
 <div class="journey-desc">TauSeer, TauDiff, and SSR-TauDiff connect fibril-specific AI with patient-tau-seeded neuronal experiments.</div>
@@ -328,10 +361,9 @@
 <div class="stats-row"><div class="stat-item"><div class="stat-num">24</div><div class="stat-label">Peer-reviewed publications</div></div>
 <div class="stat-item"><div class="stat-num">13</div><div class="stat-label">First / corresponding author</div></div>
 <div class="stat-item"><div class="stat-num">400+</div><div class="stat-label">Citations · h-index 12</div></div>
-<div class="stat-item"><div class="stat-num">53M</div><div class="stat-label">Compounds screened with TauSeer</div></div></div><p class="metrics-note">Publication and citation metrics from my November 2026 CV.</p>
+<div class="stat-item"><div class="stat-num">53M</div><div class="stat-label">Compounds screened with TauSeer</div></div></div>
 </section>
 <!-- NEWS & MEDIA: Easton Center WHAM article added November 2026. -->
-
 <section aria-labelledby="news-title" class="section" id="news">
 <h2 class="section-title" id="news-title">News &amp; Media</h2>
 <p class="section-subtitle">Recent recognition and stories behind the research</p>
@@ -362,9 +394,7 @@
 </article>
 </div>
 </section>
-
 <!-- PUBLICATIONS -->
-
 <section class="section" id="publications">
 <h2 class="section-title">Selected Publications</h2>
 <div class="section-subtitle">† equal contribution · * corresponding author</div>
@@ -409,9 +439,7 @@
 <div class="pub-group"><h3 class="pub-group-label">Recent Collaborative Work (2026)</h3>
 <div class="pub-entry">Bao B.†, <span class="me">Wei Y.†*</span>, et al. Wireless Multidimensional Vibration Sensing System for Multisite Biomechanical Assessment. <span class="journal">Materials Today.</span> Accepted, 2026.</div>
 <div class="pub-entry">Zhang W.†*, Hu Q.†, et al., <span class="me">Wei Y.</span>, et al. Toward Closed-Loop Cognitive Modulation in Alzheimer's Disease: BCI-Relevant Evidence and a Translational Roadmap. <span class="journal">Aging and Disease.</span> Accepted, 2026.</div></div></section>
-
 <!-- PEER REVIEW SERVICE -->
-
 <section class="section" id="service"><h2 class="section-title">Funding, Leadership &amp; Service</h2>
 <p class="section-subtitle">Support for the science · Contributions to the community</p>
 <div class="exp-grid funding-grid">
@@ -442,40 +470,20 @@
 </div>
 </div>
 <div class="review-block"><h3 class="subsection-heading">Peer Review</h3><p class="review-list">Ad hoc reviewer for <span class="review-journal">Information Fusion</span>, <span class="review-journal">Results in Engineering</span>, <span class="review-journal">Measurement</span>, <span class="review-journal">Talanta</span>, and <span class="review-journal">iNew Medicine</span>.</p></div></section>
-
 <!-- EXPERIENCE -->
-
 <section class="section" id="experience">
-<h2 class="section-title">Experience &amp; Education</h2>
-<div class="section-subtitle">From Tsinghua to Hong Kong to UCLA</div>
-<div class="exp-grid">
-<div>
-<div class="timeline">
-<div class="tl-item"><div class="tl-date">Nov 2024 – present</div><div class="tl-role">Postdoctoral Scholar</div><div class="tl-place">Dept. of Neurology, UCLA David Geffen School of Medicine</div><div class="tl-place" style="color: var(--accent); font-size: 0.84rem; margin-top: 0.2rem;">Mentors: Chao Peng · Wei Wang</div></div>
-<div class="tl-item"><div class="tl-date">Jul 2023 – Apr 2024</div><div class="tl-role">Research Associate</div><div class="tl-place">Dept. of Biomedical Engineering, The Chinese University of Hong Kong</div><div class="tl-place" style="color: var(--accent); font-size: 0.84rem; margin-top: 0.2rem;">Advisors: Wu Yuan · Aaron Ho-Pui Ho</div></div>
-<div class="tl-item"><div class="tl-date">2018 – 2023</div><div class="tl-role">Ph.D. in Biomedical Engineering</div><div class="tl-place">The Chinese University of Hong Kong</div><div class="tl-place" style="color: var(--accent); font-size: 0.84rem; margin-top: 0.2rem;">Advisor: Aaron Ho-Pui Ho</div></div>
-<div class="tl-item"><div class="tl-date">2014 – 2018</div><div class="tl-role">B.Eng. in Precision Instrument</div><div class="tl-place">Tsinghua University, Beijing</div></div>
-</div>
-</div>
-<div class="skills-block">
+<h2 class="section-title">Expertise &amp; Recognition</h2>
+<div class="section-subtitle">Research tools and selected honors</div>
+
+<div class="expertise-grid"><div class="skills-block">
 <h3>Technical Expertise</h3>
 <div class="skill-category"><div class="skill-category-label">Machine Learning</div><div class="tags"><span class="tag">Graph Neural Networks</span><span class="tag">Diffusion Models</span><span class="tag">Foundation Models</span><span class="tag">Zero-Shot Learning</span><span class="tag">Computer Vision</span><span class="tag">PyTorch</span></div></div>
 <div class="skill-category"><div class="skill-category-label">Drug Discovery</div><div class="tags"><span class="tag">Molecular Docking</span><span class="tag">Virtual Screening</span><span class="tag">ADMET Prediction</span><span class="tag">Structure-Based Design</span></div></div>
 <div class="skill-category"><div class="skill-category-label">Experimental</div><div class="tags"><span class="tag">Primary Neuron Culture</span><span class="tag">iPSC-Derived Neurons</span><span class="tag">High-Throughput Screening</span><span class="tag">Digital PCR</span><span class="tag">Droplet Microfluidics</span></div></div>
-<h3 style="margin-top: 1.8rem;">Selected Honors</h3>
-<div style="font-size: 0.88rem; color: var(--muted); line-height: 1.85; margin-top: 0.5rem;"><strong class="honor-title">Alzheimer's FastTrack Workshop Travel Award</strong>, BrightFocus Foundation (2026)<br/>
-<strong class="honor-title">First Place, Neuroscience</strong>, LABEST Pearl Cohen Scientific Poster Competition, UCLA (2026)<br/>
-UCLA Bioscientists of Tomorrow Cohort (2025)<br/>
-Annual Champion, Best Presentation, BME Department, CUHK (2024)<br/>
-HK Medical &amp; Health Care Device Industries Association Award (2024)<br/>
-Talent Development Scholarship, HKSAR Government (2023)<br/>
-Champion + Special Award, Prof. Charles K. Kao Creativity Awards (2019)</div>
-</div>
-</div>
-</section>
 
+
+</div><div class="honors-panel"><h3>Selected Honors</h3><ul class="honors-list"><li><span class="honor-name">Alzheimer’s FastTrack Workshop Travel Award</span><span class="honor-meta">BrightFocus Foundation · 2026</span></li><li><span class="honor-name">First Place, Neuroscience · LABEST Pearl Cohen Scientific Poster Competition</span><span class="honor-meta">UCLA · 2026</span></li><li><span class="honor-name">Bioscientists of Tomorrow Cohort</span><span class="honor-meta">UCLA · 2025</span></li><li><span class="honor-name">Annual Champion, Best Presentation</span><span class="honor-meta">BME Department, CUHK · 2024</span></li><li><span class="honor-name">Medical &amp; Health Care Device Industries Association Award</span><span class="honor-meta">Hong Kong · 2024</span></li><li><span class="honor-name">Talent Development Scholarship</span><span class="honor-meta">HKSAR Government · 2023</span></li><li><span class="honor-name">Champion + Special Award, Prof. Charles K. Kao Creativity Awards</span><span class="honor-meta">CUHK · 2019</span></li></ul></div></div></section>
 <!-- BEYOND THE LAB -->
-
 <section class="section" id="life">
 <h2 class="section-title">Community &amp; Beyond the Lab</h2>
 <div class="section-subtitle">The people, places, and experiences behind the science</div>
@@ -493,9 +501,7 @@ Champion + Special Award, Prof. Charles K. Kao Creativity Awards (2019)</div>
 <button aria-label="Open photo: With Nobel laureate Gregg Semenza" class="photo-cell" data-caption="With Nobel laureate Gregg Semenza." data-photo="images/Photo-with-Nobel-Laureate-Gregg-Semenza.jpg" type="button"><img alt="With Nobel laureate Gregg Semenza." decoding="async" loading="lazy" src="images/Photo-with-Nobel-Laureate-Gregg-Semenza.jpg" style="object-position:50% 50%"/><span>Gregg Semenza</span></button></div>
 <div class="life-tags"><span class="life-tag">Research Community</span><span class="life-tag">Mentorship</span><span class="life-tag">Hiking</span><span class="life-tag">Road Trips</span><span class="life-tag">Family</span><span class="life-tag">Academic Visits</span></div>
 </section>
-
 <!-- DANMAKU GUESTBOOK -->
-
 <section class="section danmaku-section" id="guestbook">
 <h2 class="section-title">Say Hi 👋</h2>
 <div class="section-subtitle">Send a danmaku — watch it fly across the screen</div>
@@ -510,7 +516,6 @@ Champion + Special Award, Prof. Charles K. Kao Creativity Awards (2019)</div>
 </div>
 <div class="danmaku-hint">Messages are stored and replayed for all visitors. Keep it kind! ✨</div><p aria-live="polite" class="danmaku-status" id="dm-status" role="status"></p>
 </section>
-
 <div class="contact-bar" id="contact">
 <h2>Let's Connect</h2>
 <p>I'm working toward an independent research program at the intersection of AI and therapeutic discovery. I welcome collaborations, conversations, and new ideas.</p>
@@ -521,10 +526,7 @@ Champion + Special Award, Prof. Charles K. Kao Creativity Awards (2019)</div>
 <a class="c-link" href="https://www.linkedin.com/in/yuanyuan-wei-73a855184/" rel="noopener noreferrer" target="_blank">LinkedIn</a>
 </div>
 </div>
-<footer>© 2026 Yuanyuan Wei · UCLA Department of Neurology · Last updated November 17, 2026</footer>
-
-
-
+<footer>© 2026 Yuanyuan Wei · UCLA Department of Neurology · Last updated November 18, 2026</footer>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script><script>
 'use strict';
 // Navigation
