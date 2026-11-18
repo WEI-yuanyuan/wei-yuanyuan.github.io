@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Yuanyuan Wei — AI for Biomedicine</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&amp;family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
 <style>
   :root {
     --ink: #1e2a3a;
@@ -176,371 +177,486 @@
   .lightbox-close { position: absolute; top: 1.2rem; right: 1.5rem; color: rgba(255,255,255,0.7); font-size: 1.8rem; cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.2s; background: none; border: none; }
   .lightbox-close:hover { color: #fff; background: rgba(255,255,255,0.1); }
   @keyframes lbFadeIn { from { opacity: 0; } to { opacity: 1; } }
-</style>
-</head>
-<body>
 
-<nav>
-  <div class="nav-inner">
-    <a href="#" class="nav-name">Yuanyuan Wei</a>
-    <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
-    <div class="nav-links">
-      <a href="#research">Research</a>
-      <a href="#publications">Publications</a>
-      <a href="#funding">Funding & Leadership</a>
-      <a href="#experience">Experience</a>
-      <a href="#life">Life</a>
-      <a href="#guestbook">Guestbook</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </div>
+  /* November 2026 content update: original design tokens and layout preserved. */
+  section[id], .contact-bar { scroll-margin-top: 74px; }
+  .nav-links { gap: 1.15rem; }
+  .hero-tagline { margin-bottom: 1rem; }
+  .hero-mentors { color: var(--muted); font-size: .88rem; max-width: 540px; margin-bottom: 1rem; }
+  .hero-mentors strong { color: #4a4f5a; font-weight: 600; }
+  .hero-award { display: inline-flex; align-items: center; gap: .65rem; border: 1px solid #cbdcf0; background: var(--accent-soft); border-radius: 8px; padding: .65rem .85rem; color: var(--accent-deep); text-decoration: none; font-size: .82rem; line-height: 1.5; margin-bottom: 1.35rem; }
+  .hero-award:hover { border-color: var(--accent); }
+  .award-dot { flex: 0 0 7px; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .research-narrative { margin-bottom: 1.25rem; }
+  .research-update { max-width: 740px; color: #4a4f5a; font-size: .94rem; line-height: 1.8; margin-bottom: 2.2rem; }
+  .metrics-note { text-align: right; font-size: .72rem; color: var(--muted); margin-top: .6rem; }
+  .news-list { display: grid; gap: 1rem; }
+  .news-item { border: 1px solid var(--rule); background: var(--white); border-radius: 10px; padding: 1.35rem 1.55rem; }
+  .news-featured { border-left: 3px solid var(--accent); }
+  .news-date { display: flex; align-items: center; flex-wrap: wrap; gap: .45rem 1rem; margin-bottom: .5rem; font-size: .75rem; color: var(--muted); }
+  .news-date time { font-family: var(--mono); color: var(--sky); letter-spacing: .04em; }
+  .news-badge { background: var(--accent-soft); color: var(--accent-deep); padding: .12rem .6rem; border-radius: 20px; font-weight: 600; }
+  .news-item h3 { font-size: 1.08rem; font-weight: 600; line-height: 1.5; margin-bottom: .5rem; }
+  .news-item h3 a, .funding-item h4 a { color: var(--ink); text-decoration: none; }
+  .news-item h3 a:hover, .funding-item h4 a:hover { color: var(--accent); }
+  .news-item p { font-size: .91rem; color: #4a4f5a; line-height: 1.75; }
+  .news-links { display: flex; flex-wrap: wrap; gap: .35rem 1.3rem; margin-top: .65rem; }
+  .news-links a { color: var(--accent); font-size: .8rem; font-weight: 600; text-decoration: none; }
+  .news-links a:hover { text-decoration: underline; }
+  .subsection-heading { font-family: var(--serif); font-size: 1.1rem; margin-bottom: 1rem; }
+  .funding-item { padding: 0 0 1.1rem; margin: 0 0 1.1rem; border-bottom: 1px solid var(--rule); }
+  .funding-item:last-child { margin-bottom: 0; border-bottom: none; }
+  .funding-year { color: var(--muted); font-size: .73rem; margin-bottom: .3rem; }
+  .funding-item h4 { font-size: .95rem; line-height: 1.5; font-weight: 600; margin-bottom: .4rem; }
+  .funding-item p, .service-item { font-size: .86rem; line-height: 1.75; color: #4a4f5a; }
+  .funding-item p strong { font-weight: 600; }
+  .service-item { margin-bottom: 1.15rem; }
+  .service-item > strong { color: var(--ink); font-weight: 600; }
+  .service-item p { color: var(--muted); margin-top: .3rem; }
+  .review-block { border-top: 1px dashed var(--rule); margin-top: 1.75rem; padding-top: 1.5rem; }
+  .honor-title { color: #4a4f5a; font-weight: 600; }
+  .photo-cell { appearance: none; border: 0; width: 100%; font-family: var(--sans); text-align: left; padding: .9rem; background: var(--cream); }
+  .photo-cell:nth-child(1), .photo-cell:nth-child(8) { grid-column: auto; }
+  .photo-cell.photo-wide { grid-column: span 2; }
+  .photo-cell img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .photo-cell span { line-height: 1.35; }
+  .photo-cell::after { background: linear-gradient(180deg, transparent 35%, rgba(0,0,0,.68) 100%); }
+  .lightbox-caption { max-width: 800px; width: calc(100% - 3rem); text-align: center; line-height: 1.5; font-size: .85rem; }
+  .lightbox img { max-height: 78vh; }
+  .danmaku-status { color: var(--muted); font-size: .8rem; min-height: 1.4em; margin-top: .4rem; }
+  .danmaku-form button:disabled { opacity: .65; cursor: wait; }
+  a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--sky); outline-offset: 4px; }
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 54px; left: 0; right: 0; background: rgba(252,251,249,.98); padding: 1rem 1.5rem; gap: .8rem; border-bottom: 1px solid var(--rule); }
+    .mobile-toggle { display: block; }
+  }
+  @media (max-width: 768px) {
+    .hero-mentors { margin-left: auto; margin-right: auto; }
+    .hero-award { text-align: left; }
+    .photo-wrap img { width: 180px !important; height: 225px !important; }
+    .news-item { padding: 1.2rem; }
+    .metrics-note { text-align: left; }
+    .funding-grid { gap: 2rem; }
+    .photo-cell:nth-child(1), .photo-cell:nth-child(8) { grid-column: auto; }
+    .photo-cell.photo-wide { grid-column: span 2; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .hero-label, .hero-name, .hero-tagline, .hero-meta, .photo-wrap { opacity: 1; animation: none; }
+    .photo-cell, .nav-links a, .c-link { transition: none; }
+    .lightbox.active { animation: none; }
+    .danmaku-item { animation-duration: 30s !important; }
+  }
+</style>
+<meta content="Yuanyuan Wei, PhD, is a UCLA biomedical engineer-scientist developing biology-aware AI for Alzheimer's drug discovery. 2026 WHAM Edge Award and BrightFocus/Alzheimer's Los Angeles Bold Ideas award recipient." name="description"/><meta content="Yuanyuan Wei" name="author"/><link href="https://wei-yuanyuan.github.io/" rel="canonical"/><meta content="Yuanyuan Wei - AI for Biomedicine" property="og:title"/><meta content="Yuanyuan Wei, PhD, is a UCLA biomedical engineer-scientist developing biology-aware AI for Alzheimer's drug discovery. 2026 WHAM Edge Award and BrightFocus/Alzheimer's Los Angeles Bold Ideas award recipient." property="og:description"/><meta content="website" property="og:type"/><meta content="https://wei-yuanyuan.github.io/" property="og:url"/><meta content="https://wei-yuanyuan.github.io/images/headshot.jpg" property="og:image"/><meta content="summary" name="twitter:card"/></head>
+<body><!-- Content update: 2026-11-18. Metrics and research roles: supplied November CV and NIH biosketch. Awards/news: linked sponsor pages. Photo event labels: owner-provided descriptions. Existing image paths are intentionally retained. -->
+<nav aria-label="Main navigation">
+<div class="nav-inner">
+<a class="nav-name" href="#">Yuanyuan Wei</a>
+<button aria-controls="nav-links" aria-expanded="false" aria-label="Toggle navigation" class="mobile-toggle" type="button">
+<svg fill="none" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24"><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg>
+</button>
+<div class="nav-links" id="nav-links"><a href="#news">News</a>
+<a href="#research">Research</a>
+<a href="#publications">Publications</a>
+<a href="#service">Service</a>
+<a href="#experience">Experience</a>
+<a href="#life">Life</a>
+<a href="#guestbook">Guestbook</a>
+<a href="#contact">Contact</a>
+</div>
+</div>
 </nav>
 
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-inner">
-    <div>
-      <div class="hero-label">Postdoctoral Scholar · UCLA Neurology</div>
-      <h1 class="hero-name">Yuanyuan Wei</h1>
-      <p class="hero-tagline">I translate <strong>cutting-edge AI</strong> into tools that solve real biomedical problems — from <strong>molecular diagnostics</strong> to <strong>drug discovery for neurodegenerative diseases</strong>. Every pipeline I build is validated with lab-generated biological data through <strong>closed-loop iteration</strong>, benchmarked as <strong>field-leading performance</strong>, and released with the <strong>first open benchmarks</strong> in each domain to advance the community.</p>
-      <div class="hero-meta">
-        <span>📧 <a href="mailto:yuanyuanwei@mednet.ucla.edu">yuanyuanwei@mednet.ucla.edu</a></span>
-        <span>🎓 <a href="https://scholar.google.com/citations?hl=zh-CN&user=K3Xmwr8AAAAJ" target="_blank">Google Scholar</a></span>
-        <span>📄 <a href="https://www.ncbi.nlm.nih.gov/myncbi/yuanyuan.wei.4/bibliography/public/" target="_blank">PubMed</a></span>
-        <span>💬 WeChat: Weiyy1415926</span>
-      </div>
-    </div>
-    <div class="photo-wrap">
-      <img src="images/headshot.jpg" alt="Yuanyuan Wei" style="width:230px;height:290px;object-fit:cover;border-radius:14px;border:1px solid var(--rule);">
-    </div>
-  </div>
+<div class="hero-bg"></div>
+<div class="hero-inner">
+<div>
+<div class="hero-label">Postdoctoral Scholar · UCLA Neurology</div>
+<h1 class="hero-name">Yuanyuan Wei</h1>
+<p class="hero-tagline">I build <strong>AI methods that learn from biological experiments</strong> to advance molecular diagnostics and drug discovery. At UCLA, I connect <strong>molecular prediction with disease-relevant neuronal models</strong> to identify potential treatments for Alzheimer's disease.</p><p class="hero-mentors">Co-mentored by <strong>Dr. Chao Peng</strong> in Neurology and <strong>Dr. Wei Wang</strong> in Computer Science.</p><a class="hero-award" href="#news"><span aria-hidden="true" class="award-dot"></span><span><strong>2026 WHAM Edge Award</strong> · One of 10 recipients</span></a>
+<div class="hero-meta">
+<span>📧 <a href="mailto:yuanyuanwei@mednet.ucla.edu">yuanyuanwei@mednet.ucla.edu</a></span>
+<span>🎓 <a href="https://scholar.google.com/citations?hl=zh-CN&amp;user=K3Xmwr8AAAAJ" rel="noopener noreferrer" target="_blank">Google Scholar</a></span>
+<span>📄 <a href="https://www.ncbi.nlm.nih.gov/myncbi/yuanyuan.wei.4/bibliography/public/" rel="noopener noreferrer" target="_blank">PubMed</a></span>
+<span>💬 WeChat: Weiyy1415926</span>
+</div>
+</div>
+<div class="photo-wrap">
+<img alt="Yuanyuan Wei" decoding="async" fetchpriority="high" height="290" src="images/headshot.jpg" style="width:230px;height:290px;object-fit:cover;border-radius:14px;border:1px solid var(--rule);" width="230"/>
+</div>
+</div>
 </section>
 
 <!-- RESEARCH -->
+
 <section class="section" id="research">
-  <div class="section-title">Research</div>
-  <div class="section-subtitle">Making AI work for the people who need it most</div>
+<h2 class="section-title">Research</h2>
+<div class="section-subtitle">Making AI work for the people who need it most</div>
+<p class="research-narrative">My research connects <em>engineering, artificial intelligence, and experimental biology</em>. At Tsinghua University and The Chinese University of Hong Kong, I worked on instrumentation, microfluidic systems, and AI-enabled biological measurements. At UCLA, I bring that engineering perspective to a new question: how can we find compounds that reduce pathological tau in Alzheimer's disease? Working with the Peng and Wang laboratories, I developed <em>TauSeer</em> and co-developed <em>TauDiff and SSR-TauDiff</em>. Our approach links molecular prediction and generative design to neuronal testing, using experimental results to refine the next round of predictions.</p><p class="research-update"><strong>From predictions to biological evidence.</strong> TauSeer screened 53 million purchasable compounds. In the final prospective cohort, 22 of 95 evaluable candidates reduced seeded tau pathology by more than 30%, including two with reductions above 50%. These are preliminary laboratory findings, not demonstrated benefits in patients. My WHAM-funded project now adds female- and male-derived neuronal testing to inform which candidates advance.</p>
+<div class="journey-flow" style="grid-template-columns: repeat(4, 1fr);">
+<div class="journey-step">
+<div class="journey-dot" style="background: #8b6faf; box-shadow: 0 0 0 4px #ede5f5;"></div>
+<div class="journey-era">2014 – 2018 · B.Eng.</div>
+<div class="journey-school"><strong>Tsinghua University</strong></div>
+<div class="journey-title">Brain-Inspired Computing</div>
+<div class="journey-desc">Application-circuit development for the Tianjic neuromorphic processor. An engineering foundation in instrumentation and brain-inspired computing.</div>
+</div>
+<div class="journey-step">
+<div class="journey-dot"></div>
+<div class="journey-era">2018 – 2023 · Ph.D.</div>
+<div class="journey-school"><strong>CUHK</strong></div>
+<div class="journey-title">AI × Droplet Microfluidics</div>
+<div class="journey-desc">Integrated microfluidics, instrumentation, and AI image analysis for quantitative biological assays.</div>
+</div>
+<div class="journey-step">
+<div class="journey-dot"></div>
+<div class="journey-era">2023 – 2024 · Research Associate</div>
+<div class="journey-school"><strong>CUHK</strong></div>
+<div class="journey-title">Foundation Models × Diagnostics</div>
+<div class="journey-desc">Developed SAM-dPCR for training-free image analysis and contributed an open digital PCR microscopy benchmark.</div>
+</div>
+<div class="journey-step">
+<div class="journey-dot"></div>
+<div class="journey-era">2024 – Present · Postdoc</div>
+<div class="journey-school"><strong>UCLA</strong></div>
+<div class="journey-title">AI × Neurodegenerative Drug Discovery</div>
+<div class="journey-desc">TauSeer, TauDiff, and SSR-TauDiff connect fibril-specific AI with patient-tau-seeded neuronal experiments.</div>
+</div>
+</div>
+<div class="stats-row"><div class="stat-item"><div class="stat-num">24</div><div class="stat-label">Peer-reviewed publications</div></div>
+<div class="stat-item"><div class="stat-num">13</div><div class="stat-label">First / corresponding author</div></div>
+<div class="stat-item"><div class="stat-num">400+</div><div class="stat-label">Citations · h-index 12</div></div>
+<div class="stat-item"><div class="stat-num">53M</div><div class="stat-label">Compounds screened with TauSeer</div></div></div><p class="metrics-note">Publication and citation metrics from my November 2026 CV.</p>
+</section>
+<!-- NEWS & MEDIA: Easton Center WHAM article added November 2026. -->
 
-  <p class="research-narrative">A recurring theme across my work: powerful AI tools exist, but they rarely reach the biologists, clinicians, or patients who would benefit most. My research closes that gap — not by applying off-the-shelf models, but by building <em>domain-customized AI pipelines</em> that are trained and validated on our own lab-generated biological data, iteratively refined through closed-loop experimental feedback, and benchmarked to deliver field-leading performance. Equally important, I build <em>the first open benchmarks</em> in each domain I enter — from droplet microfluidics to AD-tau inhibitor compounds — so that others can build on this foundation. During my PhD, I developed training-free AI pipelines that brought foundation models into molecular diagnostics. Now at UCLA, I apply the same philosophy to designing small-molecule therapeutics for <em>Alzheimer's and Parkinson's disease</em>, where conventional drug discovery has repeatedly failed because existing AI models weren't built for the unique geometry of pathological protein fibrils.</p>
-
-  <div class="journey-flow" style="grid-template-columns: repeat(4, 1fr);">
-    <div class="journey-step">
-      <div class="journey-dot" style="background: #8b6faf; box-shadow: 0 0 0 4px #ede5f5;"></div>
-      <div class="journey-era">2014 – 2018 · B.S.</div>
-      <div class="journey-school"><strong>Tsinghua University</strong></div>
-      <div class="journey-title">Brain-Inspired Computing</div>
-      <div class="journey-desc">Contributed to the Tianjic chip — the world's first hybrid neuromorphic processor. Where my conviction began: engineering must serve biological understanding.</div>
-    </div>
-    <div class="journey-step">
-      <div class="journey-dot"></div>
-      <div class="journey-era">2018 – 2023 · Ph.D.</div>
-      <div class="journey-school"><strong>CUHK</strong></div>
-      <div class="journey-title">AI × Droplet Microfluidics</div>
-      <div class="journey-desc">Deep learning pipelines for automated biological measurements. Built the first open benchmark database for droplet digital PCR.</div>
-    </div>
-    <div class="journey-step">
-      <div class="journey-dot"></div>
-      <div class="journey-era">2023 – 2024 · Research Associate</div>
-      <div class="journey-school"><strong>CUHK</strong></div>
-      <div class="journey-title">Foundation Models × Diagnostics</div>
-      <div class="journey-desc">Pioneered zero-shot learning in molecular diagnostics (SAM-dPCR) — clinical accuracy without task-specific training.</div>
-    </div>
-    <div class="journey-step">
-      <div class="journey-dot"></div>
-      <div class="journey-era">2024 – Present · Postdoc</div>
-      <div class="journey-school"><strong>UCLA</strong></div>
-      <div class="journey-title">AI × Neurodegenerative Drug Discovery</div>
-      <div class="journey-desc">Fibril-specific AI tools (FibrilBind, TauDiff, SSR-TauDiff) with patient-derived validation for AD and PD. First curated compound benchmark for amyloid inhibitors.</div>
-    </div>
-  </div>
-
-  <div class="stats-row">
-    <div class="stat-item"><div class="stat-num">22+</div><div class="stat-label">Publications</div></div>
-    <div class="stat-item"><div class="stat-num">12</div><div class="stat-label">First / Corresponding</div></div>
-    <div class="stat-item"><div class="stat-num">300+</div><div class="stat-label">Citations · h-index 11</div></div>
-    <div class="stat-item"><div class="stat-num">14</div><div class="stat-label">Talks & Invited Lectures</div></div>
-  </div>
+<section aria-labelledby="news-title" class="section" id="news">
+<h2 class="section-title" id="news-title">News &amp; Media</h2>
+<p class="section-subtitle">Recent recognition and stories behind the research</p>
+<div class="news-list">
+<article class="news-item news-featured">
+<div class="news-date"><time datetime="2026-11-12">NOV 2026</time><span class="news-badge">One of 10 recipients</span></div>
+<h3><a href="https://whamnow.org/news/wham-invests-in-scientists-leading-a-new-era-of-womens-health/" rel="noopener noreferrer" target="_blank">2026 WHAM Edge Award</a></h3>
+<p>A $25,000 award to extend our AI-to-neuron discovery workflow with sex-aware evaluation of Alzheimer's therapeutic candidates. I am grateful to WHAM for this support and to BrightFocus Foundation for the nomination.</p>
+<div class="news-links"><a href="https://whamnow.org/news/wham-invests-in-scientists-leading-a-new-era-of-womens-health/" rel="noopener noreferrer" target="_blank">Official announcement ↗</a><a href="https://whamnow.org/2026-wham-edge-awardees/" rel="noopener noreferrer" target="_blank">Awardee profiles ↗</a></div>
+</article>
+<article class="news-item">
+<div class="news-date"><time datetime="2026-11">NOV 2026</time><span>UCLA Mary S. Easton Center</span></div>
+<h3><a href="https://eastonad.ucla.edu/articles/news/ucla-researcher-yuanyuan-wei-receives-2026-wham-edge" rel="noopener noreferrer" target="_blank">UCLA Easton Center highlights my WHAM Edge Award</a></h3>
+<p>The Easton Center tells the story behind our AI-driven Alzheimer's drug discovery work, from early support for the Peng–Wang collaboration to the 2026 WHAM recognition.</p>
+<div class="news-links"><a href="https://eastonad.ucla.edu/articles/news/ucla-researcher-yuanyuan-wei-receives-2026-wham-edge" rel="noopener noreferrer" target="_blank">Read the Easton Center feature ↗</a></div>
+</article>
+<article class="news-item">
+<div class="news-date"><time datetime="2026-06-25">JUN 2026</time><span>BrightFocus Foundation &amp; Alzheimer's Los Angeles</span></div>
+<h3><a href="https://www.brightfocus.org/news/brightfocus-foundation-alzheimers-la-fund-new-ai-driven-alzheimers-research/" rel="noopener noreferrer" target="_blank">New funding for AI-driven Alzheimer's research</a></h3>
+<p>Our project received one of two $25,000 pilot grants through the BrightFocus–Alzheimer's Los Angeles partnership, supporting initial neuronal evaluation of AI-prioritized compounds.</p>
+<div class="news-links"><a href="https://www.brightfocus.org/news/brightfocus-foundation-alzheimers-la-fund-new-ai-driven-alzheimers-research/" rel="noopener noreferrer" target="_blank">News release ↗</a><a href="https://www.brightfocus.org/grantee/yuanyuan-wei/" rel="noopener noreferrer" target="_blank">Researcher profile ↗</a><a href="https://www.brightfocus.org/grant/fibril-specific-ai-drug-design-to-identify-tau-aggregation-inhibitors-in-alzheimers-disease/" rel="noopener noreferrer" target="_blank">Funded project ↗</a></div>
+</article>
+<article class="news-item">
+<div class="news-date"><time datetime="2026-06-03">JUN 2026</time><span>UCLA Mary S. Easton Center</span></div>
+<h3><a href="https://eastonad.ucla.edu/articles/newsletters/2026-spring-newsletter" rel="noopener noreferrer" target="_blank">Engineering Solutions to Dementia</a></h3>
+<p>The Easton Center's spring newsletter features the Peng–Wang collaboration and the early support that helped bring AI and experimental neuroscience together.</p>
+<div class="news-links"><a href="https://eastonad.ucla.edu/articles/newsletters/2026-spring-newsletter" rel="noopener noreferrer" target="_blank">Read the newsletter ↗</a></div>
+</article>
+</div>
 </section>
 
 <!-- PUBLICATIONS -->
+
 <section class="section" id="publications">
-  <div class="section-title">Selected Publications</div>
-  <div class="section-subtitle">† equal contribution · * corresponding author</div>
-  <p class="pub-note">Full list on <a href="https://www.ncbi.nlm.nih.gov/myncbi/yuanyuan.wei.4/bibliography/public/" target="_blank">PubMed</a> and <a href="https://scholar.google.com/citations?hl=zh-CN&user=K3Xmwr8AAAAJ" target="_blank">Google Scholar</a>.</p>
+<h2 class="section-title">Selected Publications</h2>
+<div class="section-subtitle">† equal contribution · * corresponding author</div>
+<p class="pub-note">Full list on <a href="https://www.ncbi.nlm.nih.gov/myncbi/yuanyuan.wei.4/bibliography/public/" rel="noopener noreferrer" target="_blank">PubMed</a> and <a href="https://scholar.google.com/citations?hl=zh-CN&amp;user=K3Xmwr8AAAAJ" rel="noopener noreferrer" target="_blank">Google Scholar</a>.</p>
+<div class="pub-group"><h3 class="pub-group-label">AI-Guided Drug Discovery for Neurodegeneration (2024–present)</h3>
+<div class="pub-entry"><span class="me">Wei Y.†</span>, Gao R.†, Zhang S.†, et al. TauSeer: Target-Weighted Graph Neural Networks and Iterative Neuronal Validation for Tau Aggregation Inhibitor Discovery. <span class="journal">In preparation.</span></div>
+<div class="pub-entry">Chen Y.†, <span class="me">Wei Y.†</span>, Zhang S.†, et al. Structure-Guided Diffusion Model for Generative Tau Aggregation Inhibitor Discovery. <span class="journal">In preparation.</span></div></div>
+<div class="pub-group">
+<h3 class="pub-group-label">Foundation Models in Molecular Diagnostics (2023–2025)</h3>
+<div class="pub-entry">
+<span class="me">Wei Y.</span>, Luo S., Xu C., et al. SAM-dPCR: Accurate and Generalist Nuclei Acid Quantification Leveraging the Zero-Shot Segment Anything Model. <span class="journal">Advanced Science</span>, 2025, 12(7): 2406797.
+      <a href="https://advanced.onlinelibrary.wiley.com/doi/full/10.1002/advs.202406797" rel="noopener noreferrer" target="_blank">[Paper]</a> <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11831435/" rel="noopener noreferrer" target="_blank">[PMC]</a>
+</div>
+<div class="pub-entry">
+<span class="me">Wei Y.</span>, Liu X., Xu C., et al. From droplets to diagnosis: AI-driven imaging and system integration in digital nucleic acid amplification testing. <span class="journal">Biosensors and Bioelectronics</span>, 2025, 117741.
+      <a href="https://doi.org/10.1016/j.bios.2025.117741" rel="noopener noreferrer" target="_blank">[DOI]</a>
+</div>
+<div class="pub-entry">
+      Liu Z., Chen J., Xu M., Ho S., <span class="me">Wei Y.*</span>, Ho H.*, Yong K.* Engineered multi-domain lipid nanoparticles for targeted delivery. <span class="journal">Chemical Society Reviews</span>, 2025, 54(12): 5961–5994.
+      <a href="https://pubmed.ncbi.nlm.nih.gov/40390667/" rel="noopener noreferrer" target="_blank">[PubMed]</a>
+</div>
+<div class="pub-entry">
+<span class="me">Wei Y.*</span>, Wu Y., Qu F., et al. Interpretable droplet digital PCR assay for trustworthy molecular diagnostics. <span class="journal">arXiv</span>, 2025.
+      <a href="https://arxiv.org/abs/2501.09218" rel="noopener noreferrer" target="_blank">[arXiv]</a>
+</div>
+</div>
+<div class="pub-group">
+<h3 class="pub-group-label">AI-Integrated Droplet Microfluidic Platforms (2018–2023)</h3>
+<div class="pub-entry">
+<span class="me">Wei Y.</span>, Abbasi S., Mehmood N., et al. Deep-qGFP: A generalist deep learning pipeline for accurate quantification of GFP-labeled biological samples in microreactors. <span class="journal">Small Methods</span>, 2024, 8(3): 2301293.
+      <a href="https://pubmed.ncbi.nlm.nih.gov/38010980/" rel="noopener noreferrer" target="_blank">[PubMed]</a>
+</div>
+<div class="pub-entry">
+<span class="me">Wei Y.†</span>, Cheng G.†, Ho H., et al. Thermodynamic perspectives on liquid-liquid droplet reactors for biochemical applications. <span class="journal">Chemical Society Reviews</span>, 2020, 49(18): 6555–6567.
+      <a href="https://pubmed.ncbi.nlm.nih.gov/32766625/" rel="noopener noreferrer" target="_blank">[PubMed]</a>
+</div>
+<div class="pub-entry">
+<span class="me">Wei Y.</span>, Wang T., Wang Y., et al. Rapid prototyping of multi-functional and biocompatible Parafilm-based microfluidic devices by laser ablation and thermal bonding. <span class="journal">Micromachines</span>, 2023, 14(3): 656.
+      <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10054776/" rel="noopener noreferrer" target="_blank">[PMC]</a>
+</div>
+</div>
+<div class="pub-group"><h3 class="pub-group-label">Recent Collaborative Work (2026)</h3>
+<div class="pub-entry">Bao B.†, <span class="me">Wei Y.†*</span>, et al. Wireless Multidimensional Vibration Sensing System for Multisite Biomechanical Assessment. <span class="journal">Materials Today.</span> Accepted, 2026.</div>
+<div class="pub-entry">Zhang W.†*, Hu Q.†, et al., <span class="me">Wei Y.</span>, et al. Toward Closed-Loop Cognitive Modulation in Alzheimer's Disease: BCI-Relevant Evidence and a Translational Roadmap. <span class="journal">Aging and Disease.</span> Accepted, 2026.</div></div></section>
 
-  <div class="pub-group">
-    <div class="pub-group-label">AI-Guided Drug Discovery for Neurodegeneration (2024–present)</div>
-    <div class="pub-entry"><span class="me">Wei Y.</span>,  Wang W., Peng C. FibrilBind & TauDiff: Structure-guided AI platform for amyloid fibril inhibitor discovery. <span class="journal">In preparation.</span></div>
-  </div>
+<!-- PEER REVIEW SERVICE -->
 
-  <div class="pub-group">
-    <div class="pub-group-label">Foundation Models in Molecular Diagnostics (2023–2025)</div>
-    <div class="pub-entry">
-      <span class="me">Wei Y.</span>, Luo S., Xu C., et al. SAM-dPCR: Accurate and generalist nucleic acid quantification leveraging the zero-shot Segment Anything Model. <span class="journal">Advanced Science</span>, 2024, 2406797.
-      <a href="https://advanced.onlinelibrary.wiley.com/doi/full/10.1002/advs.202406797" target="_blank">[Paper]</a> <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11831435/" target="_blank">[PMC]</a>
-    </div>
-    <div class="pub-entry">
-      <span class="me">Wei Y.</span>, Liu X., Xu C., et al. From droplets to diagnosis: AI-driven imaging and system integration in digital nucleic acid amplification testing. <span class="journal">Biosensors and Bioelectronics</span>, 2025, 117741.
-      <a href="https://doi.org/10.1016/j.bios.2025.117741" target="_blank">[DOI]</a>
-    </div>
-    <div class="pub-entry">
-      Liu Z., Chen J., Xu M., Ho S., <span class="me">Wei Y.*</span>, Ho H.*, Yong K.* Engineered multi-domain lipid nanoparticles for targeted delivery. <span class="journal">Chemical Society Reviews</span>, 2025, 54(12): 5961–5994. (IF: 46.2)
-      <a href="https://pubmed.ncbi.nlm.nih.gov/40390667/" target="_blank">[PubMed]</a>
-    </div>
-    <div class="pub-entry">
-      <span class="me">Wei Y.*</span>, Wu Y., Qu F., et al. Interpretable droplet digital PCR assay for trustworthy molecular diagnostics. <span class="journal">arXiv</span>, 2025.
-      <a href="https://arxiv.org/abs/2501.09218" target="_blank">[arXiv]</a>
-    </div>
-  </div>
-
-  <div class="pub-group">
-    <div class="pub-group-label">AI-Integrated Droplet Microfluidic Platforms (2018–2023)</div>
-    <div class="pub-entry">
-      <span class="me">Wei Y.</span>, Abbasi S., Mehmood N., et al. Deep-qGFP: A generalist deep learning pipeline for accurate quantification of GFP-labeled biological samples in microreactors. <span class="journal">Small Methods</span>, 2023, 2301293.
-      <a href="https://pubmed.ncbi.nlm.nih.gov/38010980/" target="_blank">[PubMed]</a>
-    </div>
-    <div class="pub-entry">
-      <span class="me">Wei Y.†</span>, Cheng G.†, Ho H., et al. Thermodynamic perspectives on liquid-liquid droplet reactors for biochemical applications. <span class="journal">Chemical Society Reviews</span>, 2020, 49(18): 6555–6567. (IF: 46.2)
-      <a href="https://pubmed.ncbi.nlm.nih.gov/32766625/" target="_blank">[PubMed]</a>
-    </div>
-    <div class="pub-entry">
-      <span class="me">Wei Y.</span>, Wang T., Wang Y., et al. Rapid prototyping of multi-functional and biocompatible Parafilm-based microfluidic devices by laser ablation and thermal bonding. <span class="journal">Micromachines</span>, 2023, 14(3): 656.
-      <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10054776/" target="_blank">[PMC]</a>
-    </div>
-  </div>
-</section>
-
-  <!-- Funding & Honors -->
-<section class="section" id="funding">
-  <div class="section-title">Funding, Leadership & Honors</div>
-  <div class="section-subtitle">Grants, service, and selected awards</div>
-  <div class="pub-group">
-    <div class="pub-group-label">Funding</div>
-    <div class="pub-entry"><span class="me">Wei Y.</span> (PI). Fibril-specific AI drug design to identify tau aggregation inhibitors in Alzheimer's disease. <span class="journal">BrightFocus Bold Ideas Initiatives Program (By Invitation Only)</span>, 2026. $25,000.</div>
-    <div class="pub-entry"><span class="me">Wei Y.</span> (PI). BrightFocus Foundation Postdoctoral Fellowship in Alzheimer's Disease Research. Resubmission planned Sep 2026. $200,000. <span style="color:var(--muted);font-size:0.82rem;">[Invited resubmission]</span></div>
-  </div>
-    <div class="pub-group">
-  <div class="pub-group-label">Leadership & Institutional Service</div>
-  <div class="pub-entry">Vice-Chair of Communications, Postdoctoral Association Executive Board, UCLA <span style="color:var(--muted);">· 2026–present</span></div>
-  <div class="pub-entry">Member, Women in Neuroscience (WiN), UCLA <span style="color:var(--muted);">· 2025–present</span></div>
-  <div class="pub-entry">Invited Participant, UCLA Connects: Chancellor's Office Hours <span style="color:var(--muted);">· 2026</span></div>
-  </div>
-  <div class="pub-group">
-    <div class="pub-group-label">Honors & Awards</div>
-    <div class="pub-entry">UCLA Bioscientists of Tomorrow Cohort Program <span style="color:var(--muted);">· 2025-present</span></div>
-    <div class="pub-entry">Travel Award, BrightFocus Foundation Alzheimer's FastTrack Workshop <span style="color:var(--muted);">· 2026</span></div> 
-    <div class="pub-entry">1st Place, Neuroscience, Pearl Cohen Scientific Poster Competition, LABEST 2026, UCLA <span style="color:var(--muted);">· 2026</span></div>
-    <div class="pub-entry">Annual Champion, Best Presentation, BME Dept., CUHK <span style="color:var(--muted);">· 2024</span></div>
-    <div class="pub-entry">Hong Kong Medical & Health Care Device Industries Association Student Research Award <span style="color:var(--muted);">· 2024</span></div>
-    <div class="pub-entry">Talent Development Scholarship, HKSAR Government <span style="color:var(--muted);">· 2023</span></div>
-    <div class="pub-entry">Champion + Special Award, Prof. Charles K. Kao Student Creativity Awards, CUHK <span style="color:var(--muted);">· 2019</span></div>
-    <div class="pub-entry">Outstanding Student Leader Award, Tsinghua University <span style="color:var(--muted);">· 2016</span></div>
-  </div>
-  <div class="pub-group">
-    <div class="pub-group-label">Peer Review</div>
-    <div class="pub-entry">Ad hoc reviewer: <span style="font-weight:600;">Information Fusion</span> <span style="color:var(--muted);font-size:0.82rem;">(IF: 17.9)</span>, <span style="font-weight:600;">Results in Engineering</span> <span style="color:var(--muted);font-size:0.82rem;">(IF: 6.0)</span>, <span style="font-weight:600;">Measurement</span> <span style="color:var(--muted);font-size:0.82rem;">(IF: 5.6)</span>, <span style="font-weight:600;">Talanta</span> <span style="color:var(--muted);font-size:0.82rem;">(IF: 5.6)</span></div>
-  </div>
-</section>
+<section class="section" id="service"><h2 class="section-title">Funding, Leadership &amp; Service</h2>
+<p class="section-subtitle">Support for the science · Contributions to the community</p>
+<div class="exp-grid funding-grid">
+<div>
+<h3 class="subsection-heading">Research Funding</h3>
+<div class="funding-item">
+<div class="funding-year">2026–2027 · Principal Investigator</div>
+<h4><a href="https://whamnow.org/news/wham-invests-in-scientists-leading-a-new-era-of-womens-health/" rel="noopener noreferrer" target="_blank">WHAM Edge Award</a></h4>
+<p><strong>$25,000 · One of 10 recipients in the 2026 cohort.</strong> Sex-aware validation of AI-discovered tau inhibitor candidates.</p>
+</div>
+<div class="funding-item">
+<div class="funding-year">2026–2027 · Principal Investigator</div>
+<h4><a href="https://www.brightfocus.org/grant/fibril-specific-ai-drug-design-to-identify-tau-aggregation-inhibitors-in-alzheimers-disease/" rel="noopener noreferrer" target="_blank">BrightFocus / Alzheimer's Los Angeles Bold Ideas Award</a></h4>
+<p><strong>$25,000 · One of two partnership pilot awards in Southern California.</strong> Fibril-specific AI drug discovery and neuronal validation.</p>
+</div>
+<div class="funding-item">
+<div class="funding-year">2025–2026 · Scientific Lead</div>
+<h4><a href="https://eastonad.ucla.edu/articles/newsletters/2026-spring-newsletter" rel="noopener noreferrer" target="_blank">Easton Center Engineering Solutions to Dementia Seed Fund</a></h4>
+<p><strong>$250,000 team award.</strong> PIs: Chao Peng and Wei Wang. I lead the interdisciplinary integration of AI development and experimental feedback.</p>
+</div>
+</div>
+<div>
+<h3 class="subsection-heading">Leadership &amp; Mentoring</h3>
+<div class="service-item"><strong>Vice-Chair of Communications</strong><br/>UCLA Postdoctoral Association Executive Board · 2026–present<p>Communications, outreach, and community building for UCLA postdoctoral scholars.</p></div>
+<div class="service-item"><strong>Lead Mentor</strong><br/>UCLA Undergraduate Research Fellows Program · 2024–present<p>Mentored more than 40 trainees across my research career, from undergraduates to postdoctoral researchers.</p></div>
+<div class="service-item"><strong>Guest Editor, Journal of Visualized Experiments</strong><p>Collection: AI-Enabled Experimental Methods for Biomedical Discovery.</p></div>
+<div class="service-item"><strong>Research Communities</strong><p>ISTAART · UCLA Women in Neuroscience · UCLA Bioscientists of Tomorrow. Invited participant, UCLA Connects: Chancellor's Office Hours (2026).</p></div>
+</div>
+</div>
+<div class="review-block"><h3 class="subsection-heading">Peer Review</h3><p class="review-list">Ad hoc reviewer for <span class="review-journal">Information Fusion</span>, <span class="review-journal">Results in Engineering</span>, <span class="review-journal">Measurement</span>, <span class="review-journal">Talanta</span>, and <span class="review-journal">iNew Medicine</span>.</p></div></section>
 
 <!-- EXPERIENCE -->
+
 <section class="section" id="experience">
-  <div class="section-title">Experience & Education</div>
-  <div class="section-subtitle">From Tsinghua to Hong Kong to UCLA</div>
-  <div class="exp-grid">
-    <div>
-      <div class="timeline">
-        <div class="tl-item"><div class="tl-date">2024 – present</div><div class="tl-role">Postdoctoral Scholar</div><div class="tl-place">Dept. of Neurology, UCLA David Geffen School of Medicine</div><div class="tl-place" style="color: var(--accent); font-size: 0.84rem; margin-top: 0.2rem;">Mentors: Chao Peng · Wei Wang</div></div>
-        <div class="tl-item"><div class="tl-date">2023 – 2024</div><div class="tl-role">Research Associate</div><div class="tl-place">Dept. of Biomedical Engineering, The Chinese University of Hong Kong</div><div class="tl-place" style="color: var(--accent); font-size: 0.84rem; margin-top: 0.2rem;">Supervisor: Wu Yuan</div></div>
-        <div class="tl-item"><div class="tl-date">2018 – 2023</div><div class="tl-role">Ph.D. in Biomedical Engineering</div><div class="tl-place">The Chinese University of Hong Kong</div><div class="tl-place" style="color: var(--accent); font-size: 0.84rem; margin-top: 0.2rem;">Advisor: Aaron Ho-Pui Ho</div></div>
-        <div class="tl-item"><div class="tl-date">2014 – 2018</div><div class="tl-role">B.S. in Precision Instrument</div><div class="tl-place">Tsinghua University, Beijing</div></div>
-      </div>
-    </div>
-    <div class="skills-block">
-      <h3>Technical Expertise</h3>
-      <div class="skill-category"><div class="skill-category-label">Machine Learning</div><div class="tags"><span class="tag">Graph Neural Networks</span><span class="tag">Diffusion Models</span><span class="tag">Foundation Models</span><span class="tag">Zero-Shot Learning</span><span class="tag">Computer Vision</span><span class="tag">PyTorch</span></div></div>
-      <div class="skill-category"><div class="skill-category-label">Drug Discovery</div><div class="tags"><span class="tag">Molecular Docking</span><span class="tag">Virtual Screening</span><span class="tag">ADMET Prediction</span><span class="tag">Structure-Based Design</span></div></div>
-      <div class="skill-category"><div class="skill-category-label">Experimental</div><div class="tags"><span class="tag">Primary Neuron Culture</span><span class="tag">iPSC-Derived Neurons</span><span class="tag">High-Throughput Screening</span><span class="tag">Digital PCR</span><span class="tag">Droplet Microfluidics</span></div></div>
-    </div>
-  </div>
+<h2 class="section-title">Experience &amp; Education</h2>
+<div class="section-subtitle">From Tsinghua to Hong Kong to UCLA</div>
+<div class="exp-grid">
+<div>
+<div class="timeline">
+<div class="tl-item"><div class="tl-date">Nov 2024 – present</div><div class="tl-role">Postdoctoral Scholar</div><div class="tl-place">Dept. of Neurology, UCLA David Geffen School of Medicine</div><div class="tl-place" style="color: var(--accent); font-size: 0.84rem; margin-top: 0.2rem;">Mentors: Chao Peng · Wei Wang</div></div>
+<div class="tl-item"><div class="tl-date">Jul 2023 – Apr 2024</div><div class="tl-role">Research Associate</div><div class="tl-place">Dept. of Biomedical Engineering, The Chinese University of Hong Kong</div><div class="tl-place" style="color: var(--accent); font-size: 0.84rem; margin-top: 0.2rem;">Advisors: Wu Yuan · Aaron Ho-Pui Ho</div></div>
+<div class="tl-item"><div class="tl-date">2018 – 2023</div><div class="tl-role">Ph.D. in Biomedical Engineering</div><div class="tl-place">The Chinese University of Hong Kong</div><div class="tl-place" style="color: var(--accent); font-size: 0.84rem; margin-top: 0.2rem;">Advisor: Aaron Ho-Pui Ho</div></div>
+<div class="tl-item"><div class="tl-date">2014 – 2018</div><div class="tl-role">B.Eng. in Precision Instrument</div><div class="tl-place">Tsinghua University, Beijing</div></div>
+</div>
+</div>
+<div class="skills-block">
+<h3>Technical Expertise</h3>
+<div class="skill-category"><div class="skill-category-label">Machine Learning</div><div class="tags"><span class="tag">Graph Neural Networks</span><span class="tag">Diffusion Models</span><span class="tag">Foundation Models</span><span class="tag">Zero-Shot Learning</span><span class="tag">Computer Vision</span><span class="tag">PyTorch</span></div></div>
+<div class="skill-category"><div class="skill-category-label">Drug Discovery</div><div class="tags"><span class="tag">Molecular Docking</span><span class="tag">Virtual Screening</span><span class="tag">ADMET Prediction</span><span class="tag">Structure-Based Design</span></div></div>
+<div class="skill-category"><div class="skill-category-label">Experimental</div><div class="tags"><span class="tag">Primary Neuron Culture</span><span class="tag">iPSC-Derived Neurons</span><span class="tag">High-Throughput Screening</span><span class="tag">Digital PCR</span><span class="tag">Droplet Microfluidics</span></div></div>
+<h3 style="margin-top: 1.8rem;">Selected Honors</h3>
+<div style="font-size: 0.88rem; color: var(--muted); line-height: 1.85; margin-top: 0.5rem;"><strong class="honor-title">Alzheimer's FastTrack Workshop Travel Award</strong>, BrightFocus Foundation (2026)<br/>
+<strong class="honor-title">First Place, Neuroscience</strong>, LABEST Pearl Cohen Scientific Poster Competition, UCLA (2026)<br/>
+UCLA Bioscientists of Tomorrow Cohort (2025)<br/>
+Annual Champion, Best Presentation, BME Department, CUHK (2024)<br/>
+HK Medical &amp; Health Care Device Industries Association Award (2024)<br/>
+Talent Development Scholarship, HKSAR Government (2023)<br/>
+Champion + Special Award, Prof. Charles K. Kao Creativity Awards (2019)</div>
+</div>
+</div>
 </section>
 
 <!-- BEYOND THE LAB -->
+
 <section class="section" id="life">
-  <div class="section-title">Beyond the Lab</div>
-  <div class="section-subtitle">The person behind the papers</div>
-  <p class="life-intro">I believe the best science comes from a full life. When I'm not at the bench or debugging model architectures, you'll find me on a trail, in a museum standing too long before a Monet, or road-tripping to the next national park. I write and paint in my quiet hours — it's how I think through problems that code can't solve. I'm also passionate about mentorship, and I carry that same energy into everything I do. :)</p>
-  <div class="photo-grid">
-    <div class="photo-cell" style="background-image:url('images/Hiking-photo-Yuanyuan.jpg');"><span>🥾 Hiking</span></div>
-    <div class="photo-cell" style="background-image:url('images/Cycling-activity-in-Hong-Kong.jpg');"><span>🚴 Cycling in Hong Kong</span></div>
-    <div class="photo-cell" style="background-image:url('images/Big-Bear-Lake.jpg');"><span>🏔️ Big Bear Lake</span></div>
-    <div class="photo-cell" style="background-image:url('images/Lab-gathering-with-supervisor-and-labmates.jpg');"><span>👥 Lab Family</span></div>
-    <div class="photo-cell" style="background-image:url('images/Talk-in-Tsinghua.jpg');"><span>🎤 Invited Talk at Tsinghua</span></div>
-    <div class="photo-cell" style="background-image:url('images/Travel-in-France.jpg');"><span>✈️ Visit in France</span></div>
-    <div class="photo-cell" style="background-image:url('images/Family-photo-with-parents-in-Thailand.jpg');"><span>👨‍👩‍👧 Family in Thailand</span></div>
-    <div class="photo-cell" style="background-image:url('images/Photo-with-Nobel-Laureate-Edvard-Moser.jpg');"><span>🏆 With Nobel Laureate Edvard Moser</span></div>
-    <div class="photo-cell" style="background-image:url('images/Photo-with-Nobel-Laureate-Gregg-Semenza.jpg');"><span>🏆 With Nobel Laureate Gregg Semenza</span></div>
-    <div class="photo-cell" style="background-image:url('images/Talk-in-CUHK.jpg');"><span>🎤 Invited Talk at CUHK</span></div>
-  </div>
-  <div class="life-tags">
-    <span class="life-tag">🥾 Hiking</span>
-    <span class="life-tag">🚴 Cycling</span>
-    <span class="life-tag">🚗 Road Trips</span>
-    <span class="life-tag">🏕️ National Parks</span>
-    <span class="life-tag">✈️ Traveling</span>
-    <span class="life-tag">🎤 Invited Talks</span>
-    <span class="life-tag">🤝 Mentorship & Coaching</span>
-  </div>
+<h2 class="section-title">Community &amp; Beyond the Lab</h2>
+<div class="section-subtitle">The people, places, and experiences behind the science</div>
+<p class="life-intro">Science has brought me into generous communities of mentors, collaborators, students, and friends. Recent highlights include BrightFocus Alzheimer's FastTrack and serving UCLA's postdoctoral community. Away from research, I enjoy hiking, road trips, time with family, and exploring new places.</p>
+<div aria-label="Photo gallery" class="photo-grid"><button aria-label="Open photo: BrightFocus Alzheimer's FastTrack · 2026" class="photo-cell photo-wide" data-caption="BrightFocus Alzheimer's FastTrack Workshop, Washington, DC, November 11-13, 2026. Workshop group photo." data-photo="images/fasttrack-group-2026.jpg" type="button"><img alt="BrightFocus Alzheimer's FastTrack Workshop, Washington, DC, November 11-13, 2026. Workshop group photo." decoding="async" loading="lazy" src="images/fasttrack-group-2026.jpg" style="object-position:50% 52%"/><span>BrightFocus Alzheimer's FastTrack · 2026</span></button>
+<button aria-label="Open photo: BrightFocus awardee community · 2026" class="photo-cell photo-wide" data-caption="With the BrightFocus awardee community at Alzheimer's FastTrack, Washington, DC, November 2026." data-photo="images/fasttrack-awardees-2026.jpg" type="button"><img alt="With the BrightFocus awardee community at Alzheimer's FastTrack, Washington, DC, November 2026." decoding="async" loading="lazy" src="images/fasttrack-awardees-2026.jpg" style="object-position:50% 34%"/><span>BrightFocus awardee community · 2026</span></button>
+<button aria-label="Open photo: UCLA PDA · Welcome Reception" class="photo-cell photo-wide" data-caption="UCLA Postdoc Welcome Reception, 2026. Community building through my service as PDA Vice-Chair of Communications." data-photo="images/ucla-pda-welcome-2026.jpg" type="button"><img alt="UCLA Postdoc Welcome Reception, 2026. Community building through my service as PDA Vice-Chair of Communications." decoding="async" loading="lazy" src="images/ucla-pda-welcome-2026.jpg" style="object-position:50% 15%"/><span>UCLA PDA · Welcome Reception</span></button>
+<button aria-label="Open photo: Celebrating mentorship · UCLA" class="photo-cell photo-wide" data-caption="Celebrating UCLA postdoctoral mentorship with the campus community, 2026." data-photo="images/ucla-mentoring-awards-2026.jpg" type="button"><img alt="Celebrating UCLA postdoctoral mentorship with the campus community, 2026." decoding="async" loading="lazy" src="images/ucla-mentoring-awards-2026.jpg" style="object-position:50% 30%"/><span>Celebrating mentorship · UCLA</span></button>
+<button aria-label="Open photo: Invited talk · Tsinghua, 2024" class="photo-cell" data-caption="Invited talk at the Department of Precision Instrument, Tsinghua University, 2024." data-photo="images/Talk-in-Tsinghua.jpg" type="button"><img alt="Invited talk at the Department of Precision Instrument, Tsinghua University, 2024." decoding="async" loading="lazy" src="images/Talk-in-Tsinghua.jpg" style="object-position:50% 50%"/><span>Invited talk · Tsinghua, 2024</span></button>
+<button aria-label="Open photo: France · UTT visit" class="photo-cell" data-caption="Research visit to UTT, France (2022)." data-photo="images/Travel-in-France.jpg" type="button"><img alt="Research visit to UTT, France, 2022." decoding="async" loading="lazy" src="images/Travel-in-France.jpg" style="object-position:50% 50%"/><span>France · UTT visit</span></button>
+<button aria-label="Open photo: Hiking" class="photo-cell photo-wide" data-caption="Time outdoors, away from the bench and the screen." data-photo="images/Hiking-photo-Yuanyuan.jpg" type="button"><img alt="Time outdoors, away from the bench and the screen." decoding="async" loading="lazy" src="images/Hiking-photo-Yuanyuan.jpg" style="object-position:50% 50%"/><span>Hiking</span></button>
+<button aria-label="Open photo: Big Bear Lake" class="photo-cell" data-caption="A visit to Big Bear Lake." data-photo="images/Big-Bear-Lake.jpg" type="button"><img alt="A visit to Big Bear Lake." decoding="async" loading="lazy" src="images/Big-Bear-Lake.jpg" style="object-position:50% 50%"/><span>Big Bear Lake</span></button>
+<button aria-label="Open photo: Family in Thailand" class="photo-cell" data-caption="Family time in Thailand." data-photo="images/Family-photo-with-parents-in-Thailand.jpg" type="button"><img alt="Family time in Thailand." decoding="async" loading="lazy" src="images/Family-photo-with-parents-in-Thailand.jpg" style="object-position:50% 50%"/><span>Family in Thailand</span></button>
+<button aria-label="Open photo: With Nobel laureate Edvard Moser" class="photo-cell" data-caption="With Nobel laureate Edvard Moser." data-photo="images/Photo-with-Nobel-Laureate-Edvard-Moser.jpg" type="button"><img alt="With Nobel laureate Edvard Moser." decoding="async" loading="lazy" src="images/Photo-with-Nobel-Laureate-Edvard-Moser.jpg" style="object-position:50% 50%"/><span>Edvard Moser</span></button>
+<button aria-label="Open photo: With Nobel laureate Gregg Semenza" class="photo-cell" data-caption="With Nobel laureate Gregg Semenza." data-photo="images/Photo-with-Nobel-Laureate-Gregg-Semenza.jpg" type="button"><img alt="With Nobel laureate Gregg Semenza." decoding="async" loading="lazy" src="images/Photo-with-Nobel-Laureate-Gregg-Semenza.jpg" style="object-position:50% 50%"/><span>Gregg Semenza</span></button></div>
+<div class="life-tags"><span class="life-tag">Research Community</span><span class="life-tag">Mentorship</span><span class="life-tag">Hiking</span><span class="life-tag">Road Trips</span><span class="life-tag">Family</span><span class="life-tag">Academic Visits</span></div>
 </section>
 
 <!-- DANMAKU GUESTBOOK -->
+
 <section class="section danmaku-section" id="guestbook">
-  <div class="section-title">Say Hi 👋</div>
-  <div class="section-subtitle">Send a danmaku — watch it fly across the screen</div>
-  <p class="danmaku-intro">Leave a quick note and it'll float across the board below. Think of it as a virtual wave.</p>
-  <div class="danmaku-stage" id="danmaku-stage">
-    <div class="danmaku-empty" id="danmaku-empty"><span>💬</span>Be the first to send a message!</div>
-  </div>
-  <div class="danmaku-form">
-    <input type="text" class="df-name" placeholder="Your name" id="dm-name" maxlength="30">
-    <input type="text" class="df-msg" placeholder="Say something nice..." id="dm-msg" maxlength="80">
-    <button onclick="sendDanmaku()">Send 🚀</button>
-  </div>
-  <div class="danmaku-hint">Messages are stored and replayed for all visitors. Keep it kind! ✨</div>
+<h2 class="section-title">Say Hi 👋</h2>
+<div class="section-subtitle">Send a danmaku — watch it fly across the screen</div>
+<p class="danmaku-intro">Leave a quick note and it'll float across the board below. Think of it as a virtual wave.</p>
+<div aria-label="Public guestbook messages" class="danmaku-stage" id="danmaku-stage">
+<div class="danmaku-empty" id="danmaku-empty"><span>💬</span>Be the first to send a message!</div>
+</div>
+<div class="danmaku-form">
+<input aria-label="Your name" autocomplete="name" class="df-name" id="dm-name" maxlength="30" placeholder="Your name" type="text"/>
+<input aria-label="Guestbook message" class="df-msg" id="dm-msg" maxlength="80" placeholder="Say something nice..." type="text"/>
+<button id="dm-send" type="button">Send 🚀</button>
+</div>
+<div class="danmaku-hint">Messages are stored and replayed for all visitors. Keep it kind! ✨</div><p aria-live="polite" class="danmaku-status" id="dm-status" role="status"></p>
 </section>
 
 <div class="contact-bar" id="contact">
-  <h2>Let's Connect</h2>
-  <p>I'm on track toward a faculty position (2027–2028) and always open to collaborations, conversations, and new ideas.</p>
-  <div class="contact-links">
-    <a href="mailto:yuanyuanwei@mednet.ucla.edu" class="c-link">Email</a>
-    <a href="https://www.ncbi.nlm.nih.gov/myncbi/yuanyuan.wei.4/bibliography/public/" target="_blank" class="c-link">PubMed</a>
-    <a href="https://scholar.google.com/citations?hl=zh-CN&user=K3Xmwr8AAAAJ" target="_blank" class="c-link">Google Scholar</a>
-    <a href="https://www.linkedin.com/in/yuanyuan-wei-73a855184/" target="_blank" class="c-link">LinkedIn</a>
-  </div>
+<h2>Let's Connect</h2>
+<p>I'm working toward an independent research program at the intersection of AI and therapeutic discovery. I welcome collaborations, conversations, and new ideas.</p>
+<div class="contact-links">
+<a class="c-link" href="mailto:yuanyuanwei@mednet.ucla.edu">Email</a>
+<a class="c-link" href="https://www.ncbi.nlm.nih.gov/myncbi/yuanyuan.wei.4/bibliography/public/" rel="noopener noreferrer" target="_blank">PubMed</a>
+<a class="c-link" href="https://scholar.google.com/citations?hl=zh-CN&amp;user=K3Xmwr8AAAAJ" rel="noopener noreferrer" target="_blank">Google Scholar</a>
+<a class="c-link" href="https://www.linkedin.com/in/yuanyuan-wei-73a855184/" rel="noopener noreferrer" target="_blank">LinkedIn</a>
 </div>
+</div>
+<footer>© 2026 Yuanyuan Wei · UCLA Department of Neurology · Last updated November 17, 2026</footer>
 
-<footer>© 2026 Yuanyuan Wei · UCLA Department of Neurology · Last updated March 2026</footer>
 
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-<script>
-firebase.initializeApp({
-  databaseURL: "https://yuanyuan-website-default-rtdb.firebaseio.com"
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script><script>
+'use strict';
+// Navigation
+const menuButton = document.querySelector('.mobile-toggle');
+const menu = document.getElementById('nav-links');
+function closeMenu() { menu.classList.remove('open'); menuButton.setAttribute('aria-expanded', 'false'); }
+menuButton.addEventListener('click', () => {
+  const open = menu.classList.toggle('open');
+  menuButton.setAttribute('aria-expanded', String(open));
 });
-const db = firebase.database();
+menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
-const DANMAKU_COLORS = [
-  'rgba(89,148,196,0.85)','rgba(78,130,190,0.85)','rgba(106,162,210,0.85)',
-  'rgba(200,149,108,0.8)','rgba(160,136,190,0.8)','rgba(120,175,155,0.8)',
-  'rgba(180,130,150,0.8)','rgba(140,160,200,0.85)',
-];
-const STAGE = document.getElementById('danmaku-stage');
-const EMPTY = document.getElementById('danmaku-empty');
-let activeDanmaku = 0;
-const occupiedRows = new Map();
-let initialLoadDone = false;
-
-function launchDanmaku(name, text, delay) {
-  setTimeout(() => {
-    EMPTY.style.display = 'none';
-    const el = document.createElement('div');
-    el.className = 'danmaku-item';
-    el.textContent = name ? name + ': ' + text : text;
-    el.style.background = DANMAKU_COLORS[Math.floor(Math.random() * DANMAKU_COLORS.length)];
-    el.style.top = findOpenRow(STAGE.offsetHeight) + 'px';
-    el.style.animationDuration = (12 + Math.random() * 6) + 's';
-    el.style.left = '100%';
-    STAGE.appendChild(el);
-    activeDanmaku++;
-    el.addEventListener('animationend', () => { el.remove(); activeDanmaku--; });
-  }, delay || 0);
-}
-
-function findOpenRow(stageH) {
-  const rowH = 38, maxRows = Math.floor((stageH - 20) / rowH), now = Date.now();
-  for (const [k,v] of occupiedRows) { if (now - v > 3000) occupiedRows.delete(k); }
-  for (let i = 0; i < maxRows; i++) { if (!occupiedRows.has(i)) { occupiedRows.set(i, now); return 12 + i * rowH; } }
-  return 12 + Math.floor(Math.random() * maxRows) * rowH;
-}
-
-// Load existing messages and replay
-db.ref('danmaku').orderByChild('date').limitToLast(30).once('value', snap => {
-  const msgs = [];
-  snap.forEach(child => msgs.push(child.val()));
-  msgs.reverse();
-  initialLoadDone = true;
-  if (msgs.length > 0) {
-    EMPTY.style.display = 'none';
-    msgs.forEach((m, i) => launchDanmaku(m.name, m.text, i * 800 + Math.random() * 400));
-    // Loop replay
-    if (msgs.length > 3) {
-      setInterval(() => {
-        const m = msgs[Math.floor(Math.random() * msgs.length)];
-        launchDanmaku(m.name, m.text, 0);
-      }, 4000 + Math.random() * 3000);
-    }
-  }
-});
-
-// Listen for new real-time messages
-db.ref('danmaku').orderByChild('date').limitToLast(1).on('child_added', snap => {
-  if (!initialLoadDone) return;
-  const m = snap.val();
-  if (Date.now() - new Date(m.date).getTime() < 10000) {
-    launchDanmaku(m.name, m.text, 0);
-  }
-});
-
-function sendDanmaku() {
-  const name = document.getElementById('dm-name').value.trim();
-  const text = document.getElementById('dm-msg').value.trim();
-  if (!text) { alert('Please write a message!'); return; }
-  const msg = { name: name || 'Anonymous', text, date: new Date().toISOString() };
-  db.ref('danmaku').push(msg);
-  launchDanmaku(msg.name, msg.text, 0);
-  document.getElementById('dm-name').value = '';
-  document.getElementById('dm-msg').value = '';
-}
-
-document.getElementById('dm-msg').addEventListener('keydown', e => { if (e.key === 'Enter') sendDanmaku(); });
-
-// LIGHTBOX
+// Accessible image viewer: original compositions are available on click.
 const lightbox = document.createElement('div');
 lightbox.className = 'lightbox';
-lightbox.innerHTML = '<button class="lightbox-close">&times;</button><img src="" alt=""><div class="lightbox-caption"></div>';
+lightbox.setAttribute('role', 'dialog');
+lightbox.setAttribute('aria-modal', 'true');
+lightbox.setAttribute('aria-label', 'Photo viewer');
+lightbox.setAttribute('aria-describedby', 'lightbox-caption');
+lightbox.innerHTML = '<button class="lightbox-close" type="button" aria-label="Close photo">&times;</button><img alt=""><div class="lightbox-caption" id="lightbox-caption"></div>';
 document.body.appendChild(lightbox);
-
 const lbImg = lightbox.querySelector('img');
 const lbCaption = lightbox.querySelector('.lightbox-caption');
 const lbClose = lightbox.querySelector('.lightbox-close');
-
+let previousFocus = null;
+function closePhoto() {
+  lightbox.classList.remove('active');
+  document.body.style.overflow = '';
+  if (previousFocus) previousFocus.focus({preventScroll: true});
+}
 document.querySelectorAll('.photo-cell').forEach(cell => {
   cell.addEventListener('click', () => {
-    const bg = cell.style.backgroundImage;
-    const url = bg.replace(/url\(['"]?/, '').replace(/['"]?\)/, '');
-    const caption = cell.querySelector('span') ? cell.querySelector('span').textContent : '';
-    lbImg.src = url;
-    lbCaption.textContent = caption;
+    previousFocus = cell;
+    lbImg.src = cell.dataset.photo;
+    lbImg.alt = cell.dataset.caption || '';
+    lbCaption.textContent = cell.dataset.caption || '';
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
+    lbClose.focus();
   });
 });
-
-lightbox.addEventListener('click', (e) => {
-  if (e.target === lightbox || e.target === lbClose) {
-    lightbox.classList.remove('active');
-    document.body.style.overflow = '';
-  }
+lightbox.addEventListener('click', e => { if (e.target === lightbox || e.target === lbClose) closePhoto(); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { if (lightbox.classList.contains('active')) closePhoto(); closeMenu(); }
+  if (e.key === 'Tab' && lightbox.classList.contains('active')) { e.preventDefault(); lbClose.focus(); }
 });
 
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-    lightbox.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-});
-</script>
-</body>
+// Existing public Firebase guestbook. No production writes are made during site testing.
+const STAGE = document.getElementById('danmaku-stage');
+const EMPTY = document.getElementById('danmaku-empty');
+const dmStatus = document.getElementById('dm-status');
+const sendButton = document.getElementById('dm-send');
+const COLORS = ['rgba(89,148,196,.85)','rgba(78,130,190,.85)','rgba(106,162,210,.85)','rgba(200,149,108,.8)','rgba(160,136,190,.8)','rgba(120,175,155,.8)'];
+const occupiedRows = new Map();
+const seenKeys = new Set();
+let db = null;
+let initialLoadDone = false;
+let replayTimer = null;
+let activeDanmaku = 0;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function findOpenRow(height) {
+  const maxRows = Math.max(1, Math.floor((height - 20) / 38));
+  const now = Date.now();
+  for (const [key, timestamp] of occupiedRows) { if (now - timestamp > 3000) occupiedRows.delete(key); }
+  for (let i = 0; i < maxRows; i++) { if (!occupiedRows.has(i)) { occupiedRows.set(i, now); return 12 + i * 38; } }
+  return 12 + Math.floor(Math.random() * maxRows) * 38;
+}
+function validMessage(message) {
+  return message && typeof message.text === 'string' && message.text.length > 0 && message.text.length <= 80 && (typeof message.name === 'string' || !message.name);
+}
+function launchDanmaku(message, delay = 0) {
+  if (!validMessage(message)) return;
+  setTimeout(() => {
+    if (activeDanmaku >= 20 || document.hidden) return;
+    EMPTY.style.display = 'none';
+    const el = document.createElement('div');
+    el.className = 'danmaku-item';
+    const name = (message.name || 'Anonymous').slice(0, 30);
+    el.textContent = name + ': ' + message.text;
+    el.style.background = COLORS[Math.floor(Math.random() * COLORS.length)];
+    el.style.top = findOpenRow(STAGE.offsetHeight) + 'px';
+    el.style.left = '100%';
+    el.style.animationDuration = (reduceMotion ? 30 : 12 + Math.random() * 6) + 's';
+    STAGE.appendChild(el); activeDanmaku++;
+    el.addEventListener('animationend', () => { el.remove(); activeDanmaku = Math.max(0, activeDanmaku - 1); }, {once:true});
+  }, delay);
+}
+function guestbookError() {
+  dmStatus.textContent = 'The guestbook could not connect. Please try again later.';
+  if (!STAGE.querySelector('.danmaku-item')) EMPTY.textContent = 'Leave a note when the guestbook reconnects.';
+}
+try {
+  if (typeof firebase !== 'undefined') {
+    if (!firebase.apps.length) firebase.initializeApp({databaseURL:'https://yuanyuan-website-default-rtdb.firebaseio.com'});
+    db = firebase.database();
+    db.ref('danmaku').orderByChild('date').limitToLast(30).once('value').then(snapshot => {
+      const messages = [];
+      snapshot.forEach(child => { seenKeys.add(child.key); if (validMessage(child.val())) messages.push(child.val()); });
+      initialLoadDone = true;
+      messages.reverse().forEach((message, i) => launchDanmaku(message, i * 900));
+      if (messages.length > 3 && !reduceMotion) replayTimer = setInterval(() => {
+        if (!document.hidden) launchDanmaku(messages[Math.floor(Math.random() * messages.length)]);
+      }, 6000);
+      db.ref('danmaku').orderByChild('date').limitToLast(1).on('child_added', child => {
+        if (!initialLoadDone || seenKeys.has(child.key)) return;
+        seenKeys.add(child.key);
+        const message = child.val();
+        const timestamp = Date.parse(message && message.date);
+        if (validMessage(message) && Number.isFinite(timestamp) && Math.abs(Date.now() - timestamp) < 30000) launchDanmaku(message);
+      }, guestbookError);
+    }).catch(guestbookError);
+  } else { guestbookError(); }
+} catch (error) { guestbookError(); }
+async function sendDanmaku() {
+  const nameInput = document.getElementById('dm-name');
+  const textInput = document.getElementById('dm-msg');
+  const text = textInput.value.trim().slice(0, 80);
+  if (!text) { dmStatus.textContent = 'Please write a message first.'; textInput.focus(); return; }
+  if (!db) { guestbookError(); return; }
+  if (sendButton.disabled) return;
+  const message = {name: nameInput.value.trim().slice(0,30) || 'Anonymous', text, date: new Date().toISOString()};
+  sendButton.disabled = true; dmStatus.textContent = 'Sending...';
+  try {
+    const ref = db.ref('danmaku').push();
+    await ref.set(message);
+    if (!seenKeys.has(ref.key)) { seenKeys.add(ref.key); launchDanmaku(message); }
+    textInput.value = ''; nameInput.value = ''; dmStatus.textContent = 'Thank you for your message!';
+  } catch (error) { dmStatus.textContent = 'Your message was not saved. Please try again later.'; }
+  finally { sendButton.disabled = false; }
+}
+sendButton.addEventListener('click', sendDanmaku);
+document.getElementById('dm-msg').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); sendDanmaku(); } });
+window.addEventListener('pagehide', () => { if (replayTimer) clearInterval(replayTimer); });
+</script></body>
 </html>
